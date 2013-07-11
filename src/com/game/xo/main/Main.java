@@ -11,7 +11,8 @@ import com.game.xo.common.CreateGame;
  */
 public class Main {
     public static void main(String[] args) {
-        new CreateGame();
+        CreateGame myGame = new CreateGame();
+        myGame.viewArray();
     }
 
 }

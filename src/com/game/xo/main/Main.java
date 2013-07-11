@@ -1,6 +1,7 @@
 package com.game.xo.main;
 
 import com.game.xo.common.CreateGame;
+import com.game.xo.players.Player;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +14,10 @@ public class Main {
     public static void main(String[] args) {
         CreateGame myGame = new CreateGame();
         myGame.viewArray();
+
+        Player newPlayer = new Player();
+        newPlayer.setName("Slava");
+        System.out.println(newPlayer.getName());
     }
 
 }

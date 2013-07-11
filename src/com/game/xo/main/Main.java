@@ -2,6 +2,7 @@ package com.game.xo.main;
 
 import com.game.xo.common.CreateGame;
 import com.game.xo.players.Player;
+
 import java.util.Scanner;
 
 /**
@@ -18,12 +19,29 @@ public class Main {
         CreateGame myGame = new CreateGame();
         myGame.viewArray();
 
-        Player newPlayer = new Player();
+       /* Player newPlayer = new Player();
+
         System.out.print("Enter your name: ");
         String namePlayer = myScanner.nextLine();
 
         newPlayer.setName(namePlayer);
         System.out.println(newPlayer.getName());
+         */
+
+        int axisX, axisY;
+        int chosenSymbol;
+
+        System.out.print("Choose your symbol 1- x or 0 - 0: ");
+        chosenSymbol = myScanner.nextInt();
+
+        System.out.print("Enter coordinate x: ");
+        axisX = myScanner.nextInt();
+        System.out.print("Enter coordinate y: ");
+        axisY = myScanner.nextInt();
+
+        myGame.step(axisX, axisY, chosenSymbol);
+
+        myGame.viewArray();
     }
 
 }

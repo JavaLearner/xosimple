@@ -3,7 +3,7 @@ package com.game.xo.common;
 
 public class CreateGame {
     private final int AMOUNT_CELLS = 3;
-    private int gameArray[][] = new int[AMOUNT_CELLS][AMOUNT_CELLS];
+    private char gameArray[][] = new char[AMOUNT_CELLS][AMOUNT_CELLS];
 
     public CreateGame() {
         initialArray();
@@ -12,7 +12,7 @@ public class CreateGame {
     private void initialArray() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
             for (int j = 0; j < AMOUNT_CELLS; j++) {
-                gameArray[i][j] = -1;
+                gameArray[i][j] = '_';
             }
         }
     }
@@ -20,22 +20,30 @@ public class CreateGame {
     public void viewArray() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
             for (int j = 0; j < AMOUNT_CELLS; j++) {
-                System.out.print(gameArray[i][j]);
+                System.out.print(" " + gameArray[i][j]);
             }
             System.out.println();
         }
     }
 
-    public void step(int axisX, int axisY) {
+    public void step(int axisX, int axisY, int chosenSymbol) {
         //add try/catch
         try {
-            gameArray[axisX][axisY] = 1;
+            if (chosenSymbol == 1) {
+                gameArray[axisX][axisY] = 'x';
+            } else {
+                gameArray[axisX][axisY] = '0';
 
+            }
         }
-        catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("Your coordinates invalid.");
-        }
+
+
+    catch(ArrayIndexOutOfBoundsException e)
+
+    {
+        System.out.println("Your coordinates invalid.");
     }
+}
 
     /*public boolean checking() {
 

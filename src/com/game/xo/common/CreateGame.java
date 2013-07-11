@@ -26,10 +26,15 @@ public class CreateGame {
         }
     }
 
-    public void step(int axisX , int axisY) {
+    public void step(int axisX, int axisY) {
         //add try/catch
-        gameArray [axisX][axisY] = 1;
+        try {
+            gameArray[axisX][axisY] = 1;
 
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Your coordinates invalid.");
+        }
     }
 
     /*public boolean checking() {

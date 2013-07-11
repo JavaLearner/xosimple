@@ -30,7 +30,8 @@ public class Main {
 
         int axisX, axisY;
         int chosenSymbol;
-
+        System.out.println("Game start.");
+        myGame.viewArray();
         System.out.print("Choose your symbol 1- x or 0 - 0: ");
         chosenSymbol = myScanner.nextInt();
 

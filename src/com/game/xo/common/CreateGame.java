@@ -12,7 +12,7 @@ public class CreateGame {
     private void initialArray() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
             for (int j = 0; j < AMOUNT_CELLS; j++) {
-                gameArray[i][j] = '_';
+                gameArray[i][j] = ' ';
             }
         }
     }
@@ -20,7 +20,12 @@ public class CreateGame {
     public void viewArray() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
             for (int j = 0; j < AMOUNT_CELLS; j++) {
-                System.out.print(" " + gameArray[i][j]);
+                if(gameArray[i][j] == ' '){
+                System.out.print("("+i+","+j+") " + gameArray[i][j]);
+                } else{
+                    System.out.print("  " +  gameArray[i][j] + "    ");
+
+                }
             }
             System.out.println();
         }

@@ -1,7 +1,7 @@
 package com.game.xo.main;
 
 import com.game.xo.common.CreateGame;
-import com.game.xo.players.Player;
+//import com.game.xo.players.Player;
 
 import java.util.Scanner;
 
@@ -17,7 +17,6 @@ public class Main {
         Scanner myScanner = new Scanner(System.in);
 
         CreateGame myGame = new CreateGame();
-        myGame.viewArray();
 
        /* Player newPlayer = new Player();
 
@@ -32,7 +31,7 @@ public class Main {
         int chosenSymbol;
         System.out.println("Game start.");
         myGame.viewArray();
-        System.out.print("Choose your symbol 1- x or 0 - 0: ");
+        System.out.print("Choose your symbol 1 - x or 0 - 0: ");
         chosenSymbol = myScanner.nextInt();
 
         System.out.print("Enter coordinate x: ");

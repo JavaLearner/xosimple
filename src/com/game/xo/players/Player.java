@@ -2,7 +2,8 @@ package com.game.xo.players;
 
 public class Player {
     private String name;
-    private int gameCount;
+    private boolean playStep; // zero if didn`t step, else one
+
 
     //getters and setters
     public void setName(String name) {

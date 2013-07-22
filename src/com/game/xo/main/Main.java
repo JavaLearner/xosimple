@@ -10,12 +10,16 @@ import java.util.Scanner;
  * User: JavaLearner
  * Date: 7/9/13
  * Time: 10:30 PM
- * simple game xo for console
+ * simple game "Tic Tac Toe" for console
  */
 public class Main {
     public static void main(String[] args) {
-        Scanner myScanner = new Scanner(System.in);
+        final int maxCells = 9;
+        boolean flagError = true;//false when no errors
+        boolean endOfGameFlag = true;//false if exit from game
 
+        Scanner myScanner = new Scanner(System.in);
+        String continueGame;
         CreateGame myGame = new CreateGame();
 
        /* Player newPlayer = new Player();
@@ -27,22 +31,44 @@ public class Main {
         System.out.println(newPlayer.getName());
          */
 
-        int axisX, axisY;
-        int chosenSymbol;
+        char chosenSymbol = myGame.getDefaultSymbol();
+        int intSymbol;
+        while (endOfGameFlag) {
+            System.out.println("Game start.");
+            myGame.viewArray();
+            System.out.print("Choose your symbol 1 - x or 0 - 0: ");
+            intSymbol = myScanner.nextInt();
+            switch (intSymbol) {
+                case 0:
+                    chosenSymbol = myGame.getSymbol0();
+                    break;
+                case 1:
+                    chosenSymbol = myGame.getSymbolX();
+                    break;
+                default:
+                    System.out.println("Invalid option!!!");
+                    flagError = false;
+                    break;
+            }
 
-        System.out.println("Game start.");
-        myGame.viewArray();
-        System.out.print("Choose your symbol 1 - x or 0 - 0: ");
-        chosenSymbol = myScanner.nextInt();
 
-        System.out.print("Enter coordinate x: ");
-        axisX = myScanner.nextInt();
-        System.out.print("Enter coordinate y: ");
-        axisY = myScanner.nextInt();
 
-        myGame.step(axisX, axisY, chosenSymbol);
+            while (myGame.getGlobalStepCount() < maxCells && flagError) {
+                System.out.println("chosenSymbol : " + chosenSymbol); //remove!!!
+                myGame.gameStep(chosenSymbol, flagError);
+                if (myGame.getGlobalStepCount() < maxCells) {
+                    myGame.viewArray();
+                }
+            }
+            System.out.print("You want to start new game? y/n ");
+            continueGame = myScanner.nextLine();
 
-        myGame.viewArray();
+            if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
+                endOfGameFlag = false;
+            }
+            flagError = true;
+        }
+        System.out.println("End of game...");
     }
 
 }

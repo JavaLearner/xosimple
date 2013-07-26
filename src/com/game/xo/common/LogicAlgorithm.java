@@ -9,7 +9,7 @@ public class LogicAlgorithm {
 
     public boolean searchWinner(char[][] newArray, char symbol) {
         tempField = newArray;
-        if (rowWinner(symbol) || columnWinner(symbol) || diagonalWinner()) {
+        if (rowWinner(symbol) || columnWinner(symbol) || diagonalWinner(symbol)) {
             return true;
         } else {
             return false;
@@ -60,7 +60,16 @@ public class LogicAlgorithm {
     }
 
     /*search winner in diagonal*/
-    private boolean diagonalWinner() {
+    private boolean diagonalWinner(char symbol) {
+        int sum = 0;
+        for (int i = 0; i < tempField.length; i++) {
+            if (tempField[i][i] == symbol) {
+                sum++;
+            }
+        }
+        if(sum == WINS)  {
+            return true;
+        }
         return false;
 
     }

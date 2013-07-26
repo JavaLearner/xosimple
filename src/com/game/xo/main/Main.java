@@ -21,7 +21,7 @@ public class Main {
         boolean flagError = true;//false when no errors
         boolean endOfGameFlag = true;//false if exit from game
 
-        String continueGame = "n/a";
+        String continueGame;
         CreateGame myGame;
 
        /* Player newPlayer = new Player();
@@ -39,8 +39,6 @@ public class Main {
             myGame = new CreateGame();
             char chosenSymbol = myGame.getDefaultSymbol();
 
-            //System.out.print("You want to start new game? y/n: ");
-            //continueGame = myScanner.nextLine();
             System.out.println("Game start.");
             myGame.viewArray();
             System.out.print("Choose your symbol 1 - x or 0 - 0: ");
@@ -66,19 +64,19 @@ public class Main {
             }
             myGame.viewArray();
 
-            System.out.println("continueGame: " + continueGame);
+            //System.out.println("continueGame: " + continueGame);
 
-            System.out.print("You want to start new game? y/n: ");
+            System.out.print("\nYou want to start new game? y/n: ");
             continueGame = myScanner2.nextLine();
 
-            System.out.println("continueGame: " + continueGame);
+            //System.out.println("continueGame: " + continueGame);
            if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
                 endOfGameFlag = false;
             }
             flagError = true;
 
         }
-        System.out.println("End of game...");
+        System.out.println("\nEnd of game...");
     }
 
 

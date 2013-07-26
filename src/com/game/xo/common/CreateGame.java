@@ -76,10 +76,6 @@ public class CreateGame {
 
     /*set new step in game field*/
     public void gameStep(char chosenSymbol, boolean flagError) {
-
-        System.out.println("globalStepCount: " + globalStepCount);
-        System.out.println("chosenSymbol: " + chosenSymbol);
-
         while (flagError) {
             System.out.print("Enter coordinate (x, ): ");
             axisX = myScanner.nextInt();
@@ -90,8 +86,6 @@ public class CreateGame {
             try {
                 if ((chosenSymbol == SYMBOL_X) && (gameArray[axisX][axisY] == DEFAULT_SYMBOL)) {
                     flagError = checkWin(SYMBOL_X, flagError);
-                    System.out.println("flagError: " + flagError);
-
                 } else {
                     if (gameArray[axisX][axisY] == DEFAULT_SYMBOL) {
                         myAlgorithm.searchWinner(gameArray, SYMBOL_0);
@@ -115,14 +109,13 @@ public class CreateGame {
     }
 
     private boolean checkWin(char symbol, boolean flagError) {
-        System.out.println("symbol: " + symbol);
-
         if (!myAlgorithm.searchWinner(gameArray, symbol)) {
             gameArray[axisX][axisY] = symbol;
             flagError = addition(flagError);
         } else {
             setGlobalStepCount((int) Math.pow(AMOUNT_CELLS, 2));
-            System.out.println("You win");
+            System.out.println("\nYou win\n");
+            flagError = false;
         }
         return flagError;
     }
@@ -132,8 +125,6 @@ public class CreateGame {
             globalStepCount++;
         }
         flagError = false;
-        System.out.println("globalStepCount: " + globalStepCount);
-
         return flagError;
 
     }

@@ -75,7 +75,7 @@ public class CreateGame {
     }
 
     /*set new step in game field*/
-    public void gameStep(char chosenSymbol, boolean flagError) {
+    public void gameStep(char playerSymbol1, char playerSymbol2, boolean flagError) {
         while (flagError) {
             System.out.print("Enter coordinate (x, ): ");
             axisX = myScanner.nextInt();
@@ -84,7 +84,7 @@ public class CreateGame {
 
             //add - view game field if entered the same symbol in cell
             try {
-                if ((chosenSymbol == SYMBOL_X) && (gameArray[axisX][axisY] == DEFAULT_SYMBOL)) {
+                if ((playerSymbol1 == SYMBOL_X)||(playerSymbol2 == SYMBOL_X) && (gameArray[axisX][axisY] == DEFAULT_SYMBOL)) {
                     flagError = checkWin(SYMBOL_X, flagError);
                 } else {
                     if (gameArray[axisX][axisY] == DEFAULT_SYMBOL) {

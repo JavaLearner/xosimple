@@ -70,6 +70,7 @@ public class Main {
             continueGame = myScanner2.nextLine();
 
             //System.out.println("continueGame: " + continueGame);
+            //add checking if entered not y/Y
            if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
                 endOfGameFlag = false;
             }

@@ -21,21 +21,19 @@ public class Main {
         Scanner myScanner = new Scanner(System.in);
         Scanner myScanner2 = new Scanner(System.in);
 
-        //final int maxCells = 9;
         boolean flagError = true;//false when no errors
         boolean endOfGameFlag = true;//false if exit from game
 
-        String continueGame;
+        String continueGame, namePlayer, chooseSymbol = " ";
         CreateGame myGame;
 
-        int intSymbol;
-        while (endOfGameFlag) {
+         while (endOfGameFlag) {
             myGame = new CreateGame();
 
             System.out.println("Game start.");
 
             System.out.print("Enter first name: ");
-            String namePlayer = myScanner.nextLine();
+            namePlayer = myScanner.nextLine();
             Player firstPlayer = new Human(namePlayer);
 
             System.out.print("Enter second name: ");
@@ -43,24 +41,30 @@ public class Main {
             Player secondPlayer = new Human(namePlayer);
 
             myGame.viewArray();
-            System.out.print(firstPlayer.getName() + "\nChoose your symbol 1 - x or 0 - 0: ");
-            intSymbol = myScanner.nextInt();
-            switch (intSymbol) {
-                case 0:
+
+
+
+
+            do {
+                System.out.print(firstPlayer.getName() + "\nChoose your symbol 1 - x or 0 - 0: ");
+                chooseSymbol = myScanner.nextLine();
+            switch (chooseSymbol.charAt(0)) {
+                case '0':
                     firstPlayer.setPlayerSymbol(myGame.getSymbol0());
                     secondPlayer.setPlayerSymbol(myGame.getSymbolX());
-
+                    flagError = true;
                     break;
-                case 1:
+                case '1':
                     firstPlayer.setPlayerSymbol(myGame.getSymbolX());
                     secondPlayer.setPlayerSymbol(myGame.getSymbol0());
-
+                    flagError = true;
                     break;
                 default:
-                    System.out.println("Invalid option!!!");
+                    System.out.println("Invalid option!!! Try again.");
                     flagError = false;
                     break;
             }
+           } while(!flagError);
             while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < maxSteps) {
                 System.out.println(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
                 myGame.gameStep(firstPlayer, flagError);
@@ -68,27 +72,44 @@ public class Main {
                 if (firstPlayer.getYouWin()) {
                     break;
                 }
+                if(firstPlayer.getPlayerSteps() >= maxSteps) {
+                    System.out.println("\nStandoff");
+                    break;
+                }
                 System.out.println(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
                 myGame.gameStep(secondPlayer, flagError);
                 myGame.viewArray();
+
             }
-            if(secondPlayer.getPlayerSteps() >= maxSteps) {
-                System.out.println("\nStandoff\n");
-            }
-            System.out.print("\nYou want to start new game? y/n: ");
+
+            System.out.print("You want to start new game? y/n: ");
             continueGame = myScanner2.nextLine();
 
             //add checking if entered not y/Y
+            flagError = false;
+            while(!flagError){
+            if (continueGame.charAt(0) == 'y' || continueGame.charAt(0) == 'Y') {
+                endOfGameFlag = true;
+            }else{
             if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
                 endOfGameFlag = false;
             }
-            flagError = true;
+                else{
+                    System.out.println("Invalid option!!! Try again.");
+
+                }
+            }
+                flagError = true;
+            }
 
         }
+
         System.out.println("\nEnd of game...");
         continueGame = myScanner2.nextLine();
+        }
+
 
     }
 
 
-}
+

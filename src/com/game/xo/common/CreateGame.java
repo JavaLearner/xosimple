@@ -60,7 +60,7 @@ public class CreateGame {
             viewLine(i);
             System.out.println();
         }
-
+        System.out.println();
     }
 
     public void viewLine(int axisX) {
@@ -111,8 +111,6 @@ public class CreateGame {
             gameArray[axisX][axisY] = player.getPlayerSymbol();
             flagError = addition(flagError, player);
         } else {
-            //add - set player flag if win
-            //setGlobalStepCount((int) Math.pow(AMOUNT_CELLS, 2));
             System.out.println("\n" + player.getName() + " you win\n");
             player.setYouWin(true);
             flagError = false;
@@ -123,7 +121,7 @@ public class CreateGame {
     private boolean addition(boolean flagError, Player player) {
         if (flagError) {
             globalStepCount++;
-            player.setPlayerSteps(getGlobalStepCount());
+            player.setPlayerSteps(globalStepCount);
         }
         flagError = false;
         return flagError;

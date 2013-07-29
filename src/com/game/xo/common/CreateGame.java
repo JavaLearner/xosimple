@@ -66,7 +66,7 @@ public class CreateGame {
 
     public void viewLine(int axisX) {
         for (int j = 0; j < AMOUNT_CELLS; j++) {
-            if (gameArray[axisX][j] == ' ') {
+            if (gameArray[axisX][j] == DEFAULT_SYMBOL) {
                 System.out.print("(" + axisX + "," + j + ") ");
             } else {
                 System.out.print("  " + gameArray[axisX][j] + "   ");

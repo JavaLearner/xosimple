@@ -15,9 +15,13 @@ import java.util.Scanner;
  * simple game "Tic Tac Toe" for console
  */
 public class Main {
+
+    public static final int MAX_STEPS = 9;
+    static Scanner myScanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        final int maxSteps = 9;
-        Scanner myScanner = new Scanner(System.in);
+
+
         boolean flagError = true;//false when no errors
         boolean endOfGameFlag = true;//false if exit from game
         String continueGame, namePlayer, chooseSymbol = " ";
@@ -26,56 +30,52 @@ public class Main {
         while (endOfGameFlag) {
             myGame = new CreateGame();
 
-            System.out.println("Game start.");
+            viewMessage("Game start.\n");
 
-            System.out.print("Enter first name: ");
+            viewMessage("Enter first name: ");
             namePlayer = myScanner.nextLine();
             Player firstPlayer = new Human(namePlayer);
 
-            System.out.print("Enter second name: ");
+            viewMessage("Enter second name: ");
             namePlayer = myScanner.nextLine();
             Player secondPlayer = new Human(namePlayer);
 
             myGame.viewArray();
 
             do {
-                System.out.print(firstPlayer.getName() + "\nChoose your symbol 1 - x or 0 - 0: ");
+                viewMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
                 chooseSymbol = myScanner.nextLine();
                 switch (chooseSymbol.charAt(0)) {
                     case '0':
-                        firstPlayer.setPlayerSymbol(myGame.getSymbol0());
-                        secondPlayer.setPlayerSymbol(myGame.getSymbolX());
-                        flagError = true;
+                        setSymbol(firstPlayer, secondPlayer,flagError, myGame);
                         break;
-                    case '1':
-                        firstPlayer.setPlayerSymbol(myGame.getSymbolX());
-                        secondPlayer.setPlayerSymbol(myGame.getSymbol0());
-                        flagError = true;
+                    case 'x':
+                        setSymbol(secondPlayer, firstPlayer,flagError, myGame);
                         break;
                     default:
-                        System.out.println("Invalid option!!! Try again.");
+                        viewMessage("Invalid option!!! Try again.");
                         flagError = false;
                         break;
                 }
             } while (!flagError);
-            while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < maxSteps) {
-                System.out.println(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
+            while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < MAX_STEPS) {
+                viewMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
                 myGame.gameStep(firstPlayer, flagError);
                 myGame.viewArray();
                 if (firstPlayer.getYouWin()) {
                     break;
                 }
-                if (firstPlayer.getPlayerSteps() >= maxSteps) {
-                    System.out.println("\nStandoff");
+                if (firstPlayer.getPlayerSteps() >= MAX_STEPS) {
+                    viewMessage("\nStandoff");
                     break;
                 }
-                System.out.println(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
+                viewMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
                 myGame.gameStep(secondPlayer, flagError);
                 myGame.viewArray();
 
             }
 
-            System.out.print("Start the new game? y/n: ");
+            viewMessage("Start the new game? y/n: ");
             continueGame = myScanner.nextLine();
 
             flagError = false;
@@ -86,7 +86,7 @@ public class Main {
                     if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
                         endOfGameFlag = false;
                     } else {
-                        System.out.println("Invalid option!!! Try again.");
+                        viewMessage("Invalid option!!! Try again.");
 
                     }
                 }
@@ -95,10 +95,19 @@ public class Main {
 
         }
 
-        System.out.println("\nEnd of game...");
+        viewMessage("\nEnd of game...");
         myScanner.nextLine();
     }
+ private static void setSymbol(Player player1, Player player2, boolean flagError, CreateGame game) {
+     player1.setPlayerSymbol(game.getSymbol0());
+     player2.setPlayerSymbol(game.getSymbolX());
+     flagError = true;
 
+ }
+
+ private static void viewMessage(String string) {
+     System.out.println(string);
+ }
 
 }
 

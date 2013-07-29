@@ -61,13 +61,14 @@ public class LogicAlgorithm {
 
     /*search winner in diagonal*/
     private boolean diagonalWinner(char symbol) {
-        int sum = 0;
-        for (int i = 0; i < tempField.length; i++) {
+        int i,sum = 0;
+        for (i = 0; i < tempField.length; i++) {
             if (tempField[i][i] == symbol) {
                 sum++;
             }
         }
-        if(sum == WINS)  {
+        i = 1;
+        if(sum == WINS || tempField[i][i] == symbol && tempField[i+1][i-1] == symbol && tempField[i-1][i+1] == symbol)  {
             return true;
         }
         return false;

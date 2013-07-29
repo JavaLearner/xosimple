@@ -16,6 +16,8 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
+        final int maxSteps = 9;
+
         Scanner myScanner = new Scanner(System.in);
         Scanner myScanner2 = new Scanner(System.in);
 
@@ -59,18 +61,20 @@ public class Main {
                     flagError = false;
                     break;
             }
-            while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin()) {
+            while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < maxSteps) {
                 System.out.println(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
-                myGame.gameStep(firstPlayer,flagError);
+                myGame.gameStep(firstPlayer, flagError);
                 myGame.viewArray();
-                if(firstPlayer.getYouWin()) {
+                if (firstPlayer.getYouWin()) {
                     break;
                 }
                 System.out.println(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
-                myGame.gameStep(secondPlayer,flagError);
+                myGame.gameStep(secondPlayer, flagError);
                 myGame.viewArray();
             }
-
+            if(secondPlayer.getPlayerSteps() >= maxSteps) {
+                System.out.println("\nStandoff\n");
+            }
             System.out.print("\nYou want to start new game? y/n: ");
             continueGame = myScanner2.nextLine();
 
@@ -82,6 +86,8 @@ public class Main {
 
         }
         System.out.println("\nEnd of game...");
+        continueGame = myScanner2.nextLine();
+
     }
 
 

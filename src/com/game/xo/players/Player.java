@@ -2,14 +2,14 @@ package com.game.xo.players;
 
 public class Player {
     private String name;
-    private boolean flagStep; // zero if didn`t step, else one
-    private int playerStep; //how many steps do player
+    private int gameSteps;
     private char playerSymbol;
     private boolean youWin = false;
 
 
     public Player(String name) {
         this.name = name;
+        gameSteps = 0;
     }
 
 
@@ -27,11 +27,11 @@ public class Player {
        return playerSymbol;
     }
 
-    public void setPlayerStep(int step) {
-          playerStep = step;
+    public void setPlayerSteps(int step) {
+          gameSteps = step;
     }
-    public int getPlayerStep() {
-        return playerStep;
+    public int getPlayerSteps() {
+        return gameSteps;
     }
 
     public void setYouWin(boolean win) {

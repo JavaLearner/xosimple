@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class CreateGame {
     private static final int AMOUNT_CELLS = 3;
-    private static final int maxSteps = AMOUNT_CELLS*AMOUNT_CELLS;
     private char gameArray[][] = new char[AMOUNT_CELLS][AMOUNT_CELLS];
     private static final char DEFAULT_SYMBOL = ' ';
     private static final char SYMBOL_X = 'x';
@@ -110,20 +109,21 @@ public class CreateGame {
     private boolean checkWin(Player player, boolean flagError) {
         if (!myAlgorithm.searchWinner(gameArray, player.getPlayerSymbol())) {
             gameArray[axisX][axisY] = player.getPlayerSymbol();
-            flagError = addition(flagError);
+            flagError = addition(flagError, player);
         } else {
             //add - set player flag if win
             //setGlobalStepCount((int) Math.pow(AMOUNT_CELLS, 2));
-            System.out.println(player.getName() + " you win\n");
+            System.out.println("\n" + player.getName() + " you win\n");
             player.setYouWin(true);
             flagError = false;
         }
         return flagError;
     }
 
-    private boolean addition(boolean flagError) {
+    private boolean addition(boolean flagError, Player player) {
         if (flagError) {
             globalStepCount++;
+            player.setPlayerSteps(getGlobalStepCount());
         }
         flagError = false;
         return flagError;

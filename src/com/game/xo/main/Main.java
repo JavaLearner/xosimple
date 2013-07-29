@@ -23,7 +23,7 @@ public class Main {
         String continueGame, namePlayer, chooseSymbol = " ";
         CreateGame myGame;
 
-         while (endOfGameFlag) {
+        while (endOfGameFlag) {
             myGame = new CreateGame();
 
             System.out.println("Game start.");
@@ -41,23 +41,23 @@ public class Main {
             do {
                 System.out.print(firstPlayer.getName() + "\nChoose your symbol 1 - x or 0 - 0: ");
                 chooseSymbol = myScanner.nextLine();
-            switch (chooseSymbol.charAt(0)) {
-                case '0':
-                    firstPlayer.setPlayerSymbol(myGame.getSymbol0());
-                    secondPlayer.setPlayerSymbol(myGame.getSymbolX());
-                    flagError = true;
-                    break;
-                case '1':
-                    firstPlayer.setPlayerSymbol(myGame.getSymbolX());
-                    secondPlayer.setPlayerSymbol(myGame.getSymbol0());
-                    flagError = true;
-                    break;
-                default:
-                    System.out.println("Invalid option!!! Try again.");
-                    flagError = false;
-                    break;
-            }
-           } while(!flagError);
+                switch (chooseSymbol.charAt(0)) {
+                    case '0':
+                        firstPlayer.setPlayerSymbol(myGame.getSymbol0());
+                        secondPlayer.setPlayerSymbol(myGame.getSymbolX());
+                        flagError = true;
+                        break;
+                    case '1':
+                        firstPlayer.setPlayerSymbol(myGame.getSymbolX());
+                        secondPlayer.setPlayerSymbol(myGame.getSymbol0());
+                        flagError = true;
+                        break;
+                    default:
+                        System.out.println("Invalid option!!! Try again.");
+                        flagError = false;
+                        break;
+                }
+            } while (!flagError);
             while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < maxSteps) {
                 System.out.println(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
                 myGame.gameStep(firstPlayer, flagError);
@@ -65,7 +65,7 @@ public class Main {
                 if (firstPlayer.getYouWin()) {
                     break;
                 }
-                if(firstPlayer.getPlayerSteps() >= maxSteps) {
+                if (firstPlayer.getPlayerSteps() >= maxSteps) {
                     System.out.println("\nStandoff");
                     break;
                 }
@@ -75,33 +75,32 @@ public class Main {
 
             }
 
-            System.out.print("You want to start new game? y/n: ");
+            System.out.print("Start the new game? y/n: ");
             continueGame = myScanner.nextLine();
 
             flagError = false;
-            while(!flagError){
-            if (continueGame.charAt(0) == 'y' || continueGame.charAt(0) == 'Y') {
-                endOfGameFlag = true;
-            }else{
-            if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
-                endOfGameFlag = false;
-            }
-                else{
-                    System.out.println("Invalid option!!! Try again.");
+            while (!flagError) {
+                if (continueGame.charAt(0) == 'y' || continueGame.charAt(0) == 'Y') {
+                    endOfGameFlag = true;
+                } else {
+                    if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
+                        endOfGameFlag = false;
+                    } else {
+                        System.out.println("Invalid option!!! Try again.");
 
+                    }
                 }
-            }
                 flagError = true;
             }
 
         }
 
         System.out.println("\nEnd of game...");
-         myScanner.nextLine();
-        }
-
-
+        myScanner.nextLine();
     }
+
+
+}
 
 
 

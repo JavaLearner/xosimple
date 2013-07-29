@@ -1,6 +1,7 @@
 package com.game.xo.common;
 
 import com.game.xo.players.Player;
+
 import java.util.Scanner;
 
 public class CreateGame {
@@ -106,12 +107,13 @@ public class CreateGame {
         System.out.print("Enter coordinate ( ,y): ");
         axisY = myScanner.nextInt();
     }
+
     private boolean checkWin(Player player, boolean flagError) {
         if (!myAlgorithm.searchWinner(gameArray, player.getPlayerSymbol())) {
             gameArray[axisX][axisY] = player.getPlayerSymbol();
             flagError = addition(flagError, player);
         } else {
-            System.out.println("\n" + player.getName() + " you win\n");
+            System.out.println("\n" + player.getName() + " you win!!!\n");
             player.setYouWin(true);
             flagError = false;
         }

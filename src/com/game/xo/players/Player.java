@@ -20,16 +20,17 @@ public class Player {
     }
 
     public void setPlayerSymbol(char symbol) {
-         playerSymbol = symbol;
+        playerSymbol = symbol;
     }
 
     public char getPlayerSymbol() {
-       return playerSymbol;
+        return playerSymbol;
     }
 
     public void setPlayerSteps(int step) {
-          gameSteps = step;
+        gameSteps = step;
     }
+
     public int getPlayerSteps() {
         return gameSteps;
     }

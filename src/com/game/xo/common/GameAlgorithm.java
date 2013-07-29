@@ -1,7 +1,7 @@
 package com.game.xo.common;
 
 
-public class LogicAlgorithm {
+public class GameAlgorithm {
     private char[][] tempField;
     private int findWinner;
     private static final int WINS = 3;

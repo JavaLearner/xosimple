@@ -13,10 +13,10 @@ public class StartGame {
         boolean flagError = true;//false when no errors
         boolean endOfGameFlag = true;//false if exit from game
         String continueGame, namePlayer, chooseSymbol;
-        CreateGame myGame;
+        InitializeGame myGame;
 
         while (endOfGameFlag) {
-            myGame = new CreateGame();
+            myGame = new InitializeGame();
 
             viewMessage("Game start.\n");
 
@@ -86,7 +86,7 @@ public class StartGame {
         viewMessage("\nEnd of game...");
         myScanner.nextLine();
     }
-    private static void setSymbol(Player player1, Player player2, boolean flagError, CreateGame game) {
+    private static void setSymbol(Player player1, Player player2, boolean flagError, InitializeGame game) {
         player1.setPlayerSymbol(game.getSymbol0());
         player2.setPlayerSymbol(game.getSymbolX());
         flagError = true;

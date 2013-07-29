@@ -43,7 +43,6 @@ public class InitializeGame {
         return globalStepCount;
     }
 
-    /* display game field*/
     public void viewGameField() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
             viewGameFieldSub(i);
@@ -63,7 +62,6 @@ public class InitializeGame {
 
     }
 
-    /*set new step in game field*/
     public void gameStep(Player player, boolean flagError) {
         while (flagError && !player.getYouWin()) {
             playerStep();

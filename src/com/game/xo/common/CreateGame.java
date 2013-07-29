@@ -67,7 +67,7 @@ public class CreateGame {
         System.out.println();
     }
 
-    public void viewGameFieldSub(int axisX) {
+    private void viewGameFieldSub(int axisX) {
         for (int j = 0; j < AMOUNT_CELLS; j++) {
             if (gameField[axisX][j] == DEFAULT_SYMBOL) {
                 System.out.print("(" + axisX + "," + j + ") ");

@@ -28,7 +28,7 @@ public class StartGame {
             namePlayer = myScanner.nextLine();
             Player secondPlayer = new Human(namePlayer);
 
-            myGame.viewArray();
+            myGame.viewGameField();
 
             do {
                 viewMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
@@ -49,7 +49,7 @@ public class StartGame {
             while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < MAX_STEPS) {
                 viewMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
                 myGame.gameStep(firstPlayer, flagError);
-                myGame.viewArray();
+                myGame.viewGameField();
                 if (firstPlayer.getYouWin()) {
                     break;
                 }
@@ -59,7 +59,7 @@ public class StartGame {
                 }
                 viewMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
                 myGame.gameStep(secondPlayer, flagError);
-                myGame.viewArray();
+                myGame.viewGameField();
 
             }
 

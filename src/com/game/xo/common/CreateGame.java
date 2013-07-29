@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class CreateGame {
     private static final int AMOUNT_CELLS = 3;
-    private char gameArray[][] = new char[AMOUNT_CELLS][AMOUNT_CELLS];
+    private char gameField[][] = new char[AMOUNT_CELLS][AMOUNT_CELLS];
     private static final char DEFAULT_SYMBOL = ' ';
     private static final char SYMBOL_X = 'x';
     private static final char SYMBOL_0 = '0';
@@ -16,6 +16,9 @@ public class CreateGame {
     private Scanner myScanner = new Scanner(System.in);
     LogicAlgorithm myAlgorithm = new LogicAlgorithm();
 
+    public enum Symbols {
+
+    }
     public CreateGame() {
 
         initialArray();
@@ -45,31 +48,31 @@ public class CreateGame {
     /* initialisation of game field  */
     private void initialArray() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
-            initialLine(i);
+            initializeGameFieldSub(i);
         }
     }
 
-    private void initialLine(int axisX) {
+    private void initializeGameFieldSub(int axisX) {
         for (int j = 0; j < AMOUNT_CELLS; j++) {
-            gameArray[axisX][j] = DEFAULT_SYMBOL;
+            gameField[axisX][j] = DEFAULT_SYMBOL;
         }
     }
 
     /* display game field*/
-    public void viewArray() {
+    public void viewGameField() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
-            viewLine(i);
+            viewGameFieldSub(i);
             System.out.println();
         }
         System.out.println();
     }
 
-    public void viewLine(int axisX) {
+    public void viewGameFieldSub(int axisX) {
         for (int j = 0; j < AMOUNT_CELLS; j++) {
-            if (gameArray[axisX][j] == DEFAULT_SYMBOL) {
+            if (gameField[axisX][j] == DEFAULT_SYMBOL) {
                 System.out.print("(" + axisX + "," + j + ") ");
             } else {
-                System.out.print("  " + gameArray[axisX][j] + "   ");
+                System.out.print("  " + gameField[axisX][j] + "   ");
             }
         }
 
@@ -80,10 +83,10 @@ public class CreateGame {
         while (flagError && !player.getYouWin()) {
             playerStep();
             try {
-                if ((player.getPlayerSymbol() == SYMBOL_X) && (gameArray[axisX][axisY] == DEFAULT_SYMBOL)) {
+                if ((player.getPlayerSymbol() == SYMBOL_X) && (gameField[axisX][axisY] == DEFAULT_SYMBOL)) {
                     flagError = checkWin(player, flagError);
                 } else {
-                    if (gameArray[axisX][axisY] == DEFAULT_SYMBOL) {
+                    if (gameField[axisX][axisY] == DEFAULT_SYMBOL) {
                         flagError = checkWin(player, flagError);
                     }
                 }
@@ -92,7 +95,7 @@ public class CreateGame {
 
             {
                 System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
-                viewArray();
+                viewGameField();
                 flagError = true;
             }
         }
@@ -109,8 +112,8 @@ public class CreateGame {
     }
 
     private boolean checkWin(Player player, boolean flagError) {
-        if (!myAlgorithm.searchWinner(gameArray, player.getPlayerSymbol())) {
-            gameArray[axisX][axisY] = player.getPlayerSymbol();
+        if (!myAlgorithm.searchWinner(gameField, player.getPlayerSymbol())) {
+            gameField[axisX][axisY] = player.getPlayerSymbol();
             flagError = addition(flagError, player);
         } else {
             System.out.println("\n" + player.getName() + " you win!!!\n");

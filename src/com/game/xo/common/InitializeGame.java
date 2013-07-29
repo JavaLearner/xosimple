@@ -63,7 +63,7 @@ public class InitializeGame {
 
     public void gameStep(Player player, boolean flagError) {
         while (flagError && !player.getYouWin()) {
-            playerStep();
+            getPlayerStep();
             try {
                 if ((player.getPlayerSymbol() == SYMBOL_X) && (gameField[axisX][axisY] == EMPTY_CELL)) {
                     flagError = checkWin(player, flagError);
@@ -86,7 +86,7 @@ public class InitializeGame {
 
     }
 
-    private void playerStep() {
+    private void getPlayerStep() {
         System.out.print("Enter coordinate (x, ): ");
         axisX = scanner.nextInt();
         System.out.print("Enter coordinate ( ,y): ");

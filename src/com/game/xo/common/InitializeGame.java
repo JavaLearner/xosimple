@@ -14,7 +14,7 @@ public class InitializeGame {
     private int axisX, axisY;
 
     private Scanner scanner = new Scanner(System.in);
-    GameAlgorithm newGame = new GameAlgorithm();
+    private GameAlgorithm newGame = new GameAlgorithm();
 
     public InitializeGame() {
         globalStepCount = 0;

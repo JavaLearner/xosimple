@@ -8,10 +8,12 @@ public class Player {
     private boolean youWin = false;
 
 
-    //getters and setters
-    public void setName(String name) {
+    public Player(String name) {
         this.name = name;
     }
+
+
+    //getters and setters
 
     public String getName() {
         return name;

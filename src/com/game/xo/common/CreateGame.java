@@ -1,15 +1,16 @@
 package com.game.xo.common;
 
-
+import com.game.xo.players.Player;
 import java.util.Scanner;
 
 public class CreateGame {
     private static final int AMOUNT_CELLS = 3;
+    private static final int maxSteps = AMOUNT_CELLS*AMOUNT_CELLS;
     private char gameArray[][] = new char[AMOUNT_CELLS][AMOUNT_CELLS];
     private static final char DEFAULT_SYMBOL = ' ';
     private static final char SYMBOL_X = 'x';
     private static final char SYMBOL_0 = '0';
-    private int globalStepCount = 0;
+    private int globalStepCount;
     private int axisX, axisY;
 
     private Scanner myScanner = new Scanner(System.in);
@@ -18,7 +19,7 @@ public class CreateGame {
     public CreateGame() {
 
         initialArray();
-
+        globalStepCount = 0;
     }
 
     public char getSymbolX() {
@@ -75,24 +76,16 @@ public class CreateGame {
     }
 
     /*set new step in game field*/
-    public void gameStep(char playerSymbol1, char playerSymbol2, boolean flagError) {
-        while (flagError) {
-            System.out.print("Enter coordinate (x, ): ");
-            axisX = myScanner.nextInt();
-            System.out.print("Enter coordinate ( ,y): ");
-            axisY = myScanner.nextInt();
-
-            //add - view game field if entered the same symbol in cell
+    public void gameStep(Player player, boolean flagError) {
+        while (flagError && !player.getYouWin()) {
+            playerStep();
             try {
-                if ((playerSymbol1 == SYMBOL_X)||(playerSymbol2 == SYMBOL_X) && (gameArray[axisX][axisY] == DEFAULT_SYMBOL)) {
-                    flagError = checkWin(SYMBOL_X, flagError);
+                if ((player.getPlayerSymbol() == SYMBOL_X) && (gameArray[axisX][axisY] == DEFAULT_SYMBOL)) {
+                    flagError = checkWin(player, flagError);
                 } else {
                     if (gameArray[axisX][axisY] == DEFAULT_SYMBOL) {
-                        myAlgorithm.searchWinner(gameArray, SYMBOL_0);
-                        gameArray[axisX][axisY] = SYMBOL_0;
-                        flagError = addition(flagError);
+                        flagError = checkWin(player, flagError);
                     }
-
                 }
 
             } catch (ArrayIndexOutOfBoundsException e)
@@ -103,18 +96,26 @@ public class CreateGame {
                 flagError = true;
             }
         }
-        flagError = checkWin(chosenSymbol, flagError);
+        flagError = checkWin(player, flagError);
 
 
     }
 
-    private boolean checkWin(char symbol, boolean flagError) {
-        if (!myAlgorithm.searchWinner(gameArray, symbol)) {
-            gameArray[axisX][axisY] = symbol;
+    private void playerStep() {
+        System.out.print("Enter coordinate (x, ): ");
+        axisX = myScanner.nextInt();
+        System.out.print("Enter coordinate ( ,y): ");
+        axisY = myScanner.nextInt();
+    }
+    private boolean checkWin(Player player, boolean flagError) {
+        if (!myAlgorithm.searchWinner(gameArray, player.getPlayerSymbol())) {
+            gameArray[axisX][axisY] = player.getPlayerSymbol();
             flagError = addition(flagError);
         } else {
-            setGlobalStepCount((int) Math.pow(AMOUNT_CELLS, 2));
-            System.out.println("\nYou win\n");
+            //add - set player flag if win
+            //setGlobalStepCount((int) Math.pow(AMOUNT_CELLS, 2));
+            System.out.println(player.getName() + " you win\n");
+            player.setYouWin(true);
             flagError = false;
         }
         return flagError;

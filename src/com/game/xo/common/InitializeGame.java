@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class InitializeGame {
     private static final int AMOUNT_CELLS = 3;
-    private char gameField[][] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+    private char gameField[][] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
     private static final char EMPTY_CELL = ' ';
     private static final char SYMBOL_X = 'x';
     private static final char SYMBOL_0 = '0';
@@ -33,7 +33,9 @@ public class InitializeGame {
     }
 
     public void setGlobalStepCount(int globalStepCount) {
-        this.globalStepCount = globalStepCount;
+        if (globalStepCount >= 0 && globalStepCount < 9) {
+            this.globalStepCount = globalStepCount;
+        }
     }
 
     public int getGlobalStepCount() {

@@ -16,9 +16,6 @@ public class InitializeGame {
     private Scanner scanner = new Scanner(System.in);
     GameAlgorithm newGame = new GameAlgorithm();
 
-    public enum Symbols {
-
-    }
     public InitializeGame() {
         globalStepCount = 0;
     }

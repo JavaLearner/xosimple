@@ -13,10 +13,10 @@ public class StartGame {
         boolean flagError = true;//false when no errors
         boolean endOfGameFlag = true;//false if exit from game
         String continueGame, namePlayer, chooseSymbol;
-        InitializeGame myGame;
+        GameProcess myGame;
 
         while (endOfGameFlag) {
-            myGame = new InitializeGame();
+            myGame = new GameProcess();
 
             viewMessage("Game start.\n");
 
@@ -48,7 +48,7 @@ public class StartGame {
             } while (!flagError);
             while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < MAX_STEPS) {
                 viewMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
-                myGame.gameStep(firstPlayer, flagError);
+                myGame.gameMovies(firstPlayer, flagError);
                 myGame.displayGameField();
                 if (firstPlayer.getYouWin()) {
                     break;
@@ -58,7 +58,7 @@ public class StartGame {
                     break;
                 }
                 viewMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
-                myGame.gameStep(secondPlayer, flagError);
+                myGame.gameMovies(secondPlayer, flagError);
                 myGame.displayGameField();
 
             }
@@ -86,7 +86,7 @@ public class StartGame {
         viewMessage("\nEnd of game...");
         myScanner.nextLine();
     }
-    private static void setSymbol(Player player1, Player player2, boolean flagError, InitializeGame game) {
+    private static void setSymbol(Player player1, Player player2, boolean flagError, GameProcess game) {
         player1.setPlayerSymbol(game.getSymbol0());
         player2.setPlayerSymbol(game.getSymbolX());
         flagError = true;

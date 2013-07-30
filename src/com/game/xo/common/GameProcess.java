@@ -4,7 +4,7 @@ import com.game.xo.players.Player;
 
 import java.util.Scanner;
 
-public class InitializeGame {
+public class GameProcess {
     private static final int AMOUNT_CELLS = 3;
     private char gameField[][] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
     private static final char EMPTY_CELL = ' ';
@@ -16,7 +16,7 @@ public class InitializeGame {
     private Scanner scanner = new Scanner(System.in);
     private GameAlgorithm newGame = new GameAlgorithm();
 
-    public InitializeGame() {
+    public GameProcess() {
         globalStepCount = 0;
     }
 
@@ -61,7 +61,7 @@ public class InitializeGame {
 
     }
 
-    public void gameStep(Player player, boolean flagError) {
+    public void gameMovies(Player player, boolean flagError) {
         while (flagError && !player.getYouWin()) {
             getPlayerStep();
             try {

@@ -14,7 +14,7 @@ public class GameProcess {
     private int axisX, axisY;
 
     private Scanner scanner = new Scanner(System.in);
-    private GameAlgorithm newGame = new GameAlgorithm();
+    private SearchWinner newGame = new SearchWinner();
 
     public GameProcess() {
         globalStepCount = 0;

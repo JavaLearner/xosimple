@@ -42,15 +42,15 @@ public class InitializeGame {
         return globalStepCount;
     }
 
-    public void viewGameField() {
+    public void displayGameField() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
-            viewGameFieldSub(i);
+            displayGameFieldSub(i);
             System.out.println();
         }
         System.out.println();
     }
 
-    private void viewGameFieldSub(int axisX) {
+    private void displayGameFieldSub(int axisX) {
         for (int j = 0; j < AMOUNT_CELLS; j++) {
             if (gameField[axisX][j] == EMPTY_CELL) {
                 System.out.print("(" + axisX + "," + j + ") ");
@@ -77,7 +77,7 @@ public class InitializeGame {
 
             {
                 System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
-                viewGameField();
+                displayGameField();
                 flagError = true;
             }
         }

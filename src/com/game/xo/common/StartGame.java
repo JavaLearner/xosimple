@@ -7,38 +7,38 @@ import java.util.Scanner;
 
 public class StartGame {
     public static final int MAX_STEPS = 9;
-    Scanner myScanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     public void startGame() {
         boolean flagError = true;//false when no errors
         boolean endOfGameFlag = true;//false if exit from game
         String continueGame, namePlayer, chooseSymbol;
-        GameProcess myGame;
+        GameProcess newGame;
 
         while (endOfGameFlag) {
-            myGame = new GameProcess();
+            newGame = new GameProcess();
 
             viewMessage("Game start.\n");
 
             viewMessage("Enter first name: ");
-            namePlayer = myScanner.nextLine();
+            namePlayer = scanner.nextLine();
             Player firstPlayer = new Human(namePlayer);
 
             viewMessage("Enter second name: ");
-            namePlayer = myScanner.nextLine();
+            namePlayer = scanner.nextLine();
             Player secondPlayer = new Human(namePlayer);
 
-            myGame.displayGameField();
+            newGame.displayGameField();
 
             do {
                 viewMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
-                chooseSymbol = myScanner.nextLine();
+                chooseSymbol = scanner.nextLine();
                 switch (chooseSymbol.charAt(0)) {
                     case '0':
-                        setSymbol(firstPlayer, secondPlayer,flagError, myGame);
+                        setSymbol(firstPlayer, secondPlayer,flagError, newGame);
                         break;
                     case 'x':
-                        setSymbol(secondPlayer, firstPlayer,flagError, myGame);
+                        setSymbol(secondPlayer, firstPlayer,flagError, newGame);
                         break;
                     default:
                         viewMessage("Invalid option!!! Try again.");
@@ -48,8 +48,8 @@ public class StartGame {
             } while (!flagError);
             while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < MAX_STEPS) {
                 viewMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
-                myGame.gameMovies(firstPlayer, flagError);
-                myGame.displayGameField();
+                newGame.gameMovies(firstPlayer, flagError);
+                newGame.displayGameField();
                 if (firstPlayer.getYouWin()) {
                     break;
                 }
@@ -58,13 +58,13 @@ public class StartGame {
                     break;
                 }
                 viewMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
-                myGame.gameMovies(secondPlayer, flagError);
-                myGame.displayGameField();
+                newGame.gameMovies(secondPlayer, flagError);
+                newGame.displayGameField();
 
             }
 
             viewMessage("Start the new game? y/n: ");
-            continueGame = myScanner.nextLine();
+            continueGame = scanner.nextLine();
 
             flagError = false;
             while (!flagError) {
@@ -84,11 +84,11 @@ public class StartGame {
         }
 
         viewMessage("\nEnd of game...");
-        myScanner.nextLine();
+        scanner.nextLine();
     }
-    private static void setSymbol(Player player1, Player player2, boolean flagError, GameProcess game) {
-        player1.setPlayerSymbol(game.getSymbol0());
-        player2.setPlayerSymbol(game.getSymbolX());
+    private static void setSymbol(Player player1, Player player2, boolean flagError, GameProcess newGame) {
+        player1.setPlayerSymbol(newGame.SYMBOL_0);
+        player2.setPlayerSymbol(newGame.SYMBOL_X);
         flagError = true;
 
     }

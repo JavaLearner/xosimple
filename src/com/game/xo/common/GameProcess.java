@@ -7,30 +7,18 @@ import java.util.Scanner;
 public class GameProcess {
     private static final int AMOUNT_CELLS = 3;
     private char gameField[][] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
-    private static final char EMPTY_CELL = ' ';
-    private static final char SYMBOL_X = 'x';
-    private static final char SYMBOL_0 = '0';
+    public final char EMPTY_CELL = ' ';
+    public final char SYMBOL_X = 'x';
+    public final char SYMBOL_0 = '0';
     private int globalStepCount;
     private int axisX;
     private int axisY;
 
     private Scanner scanner = new Scanner(System.in);
-    private SearchWinner newGame = new SearchWinner();
+    private SearchWinner searchWinner = new SearchWinner();
 
     public GameProcess() {
         globalStepCount = 0;
-    }
-
-    public char getSymbolX() {
-        return SYMBOL_X;
-    }
-
-    public char getSymbol0() {
-        return SYMBOL_0;
-    }
-
-    public char getDefaultSymbol() {
-        return EMPTY_CELL;
     }
 
     public void setGlobalStepCount(int globalStepCount) {
@@ -95,9 +83,9 @@ public class GameProcess {
     }
 
     private boolean checkWin(Player player, boolean flagError) {
-        if (!newGame.searchWinner(gameField, player.getPlayerSymbol())) {
+        if (!searchWinner.searchWinner(gameField, player.getPlayerSymbol())) {
             gameField[axisX][axisY] = player.getPlayerSymbol();
-            flagError = addition(flagError, player);
+            flagError = updateFields(flagError, player);
         } else {
             System.out.println("\n" + player.getName() + " you win!!!\n");
             player.setYouWin(true);
@@ -106,7 +94,7 @@ public class GameProcess {
         return flagError;
     }
 
-    private boolean addition(boolean flagError, Player player) {
+    private boolean updateFields(boolean flagError, Player player) {
         if (flagError) {
             globalStepCount++;
             player.setPlayerSteps(globalStepCount);

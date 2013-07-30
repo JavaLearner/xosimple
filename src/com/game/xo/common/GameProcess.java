@@ -11,7 +11,8 @@ public class GameProcess {
     private static final char SYMBOL_X = 'x';
     private static final char SYMBOL_0 = '0';
     private int globalStepCount;
-    private int axisX, axisY;
+    private int axisX;
+    private int axisY;
 
     private Scanner scanner = new Scanner(System.in);
     private SearchWinner newGame = new SearchWinner();

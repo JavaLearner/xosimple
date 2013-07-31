@@ -1,7 +1,7 @@
 package com.game.xo.main;
 
 
-import com.game.xo.common.StartGame;
+import com.game.xo.common.Game;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,8 +13,16 @@ import com.game.xo.common.StartGame;
 public class Main {
 
        public static void main(String[] args) {
-           StartGame newGame = new StartGame();
-           newGame.startGame();
+           Game game = new Game();
+           game.Game();
+
+           /*char[][] temp = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+           int x = 1;
+           int y = 0;
+
+           ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
+           artificialIntelligence.primaryStage(temp, x, y);
+           */
        }
 }
 

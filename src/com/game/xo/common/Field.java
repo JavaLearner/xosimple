@@ -4,7 +4,7 @@ import com.game.xo.players.Player;
 
 import java.util.Scanner;
 
-public class GameProcess {
+public class Field {
     private static final int AMOUNT_CELLS = 3;
     private char gameField[][] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
     public final char EMPTY_CELL = ' ';
@@ -17,7 +17,7 @@ public class GameProcess {
     private Scanner scanner = new Scanner(System.in);
     private SearchWinner searchWinner = new SearchWinner();
 
-    public GameProcess() {
+    public Field() {
         globalStepCount = 0;
     }
 
@@ -31,15 +31,15 @@ public class GameProcess {
         return globalStepCount;
     }
 
-    public void displayGameField() {
+    public void displayField() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
-            displayGameFieldSub(i);
+            displayFieldSub(i);
             System.out.println();
         }
         System.out.println();
     }
 
-    private void displayGameFieldSub(int axisX) {
+    private void displayFieldSub(int axisX) {
         for (int j = 0; j < AMOUNT_CELLS; j++) {
             if (gameField[axisX][j] == EMPTY_CELL) {
                 System.out.print("(" + axisX + "," + j + ") ");
@@ -66,7 +66,7 @@ public class GameProcess {
 
             {
                 System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
-                displayGameField();
+                displayField();
                 flagError = true;
             }
         }
@@ -85,7 +85,7 @@ public class GameProcess {
     private boolean checkWin(Player player, boolean flagError) {
         if (!searchWinner.searchWinner(gameField, player.getPlayerSymbol())) {
             gameField[axisX][axisY] = player.getPlayerSymbol();
-            flagError = updateFields(flagError, player);
+            flagError = updates(flagError, player);
         } else {
             System.out.println("\n" + player.getName() + " you win!!!\n");
             player.setYouWin(true);
@@ -94,7 +94,7 @@ public class GameProcess {
         return flagError;
     }
 
-    private boolean updateFields(boolean flagError, Player player) {
+    private boolean updates(boolean flagError, Player player) {
         if (flagError) {
             globalStepCount++;
             player.setPlayerSteps(globalStepCount);

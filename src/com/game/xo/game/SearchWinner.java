@@ -1,4 +1,4 @@
-package com.game.xo.common;
+package com.game.xo.game;
 
 
 public class SearchWinner {

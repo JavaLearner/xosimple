@@ -1,7 +1,7 @@
 package com.game.xo.main;
 
 
-import com.game.xo.common.Game;
+import com.game.xo.game.Game;
 
 /**
  * Created with IntelliJ IDEA.

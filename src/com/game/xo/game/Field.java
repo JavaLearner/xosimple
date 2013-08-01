@@ -13,6 +13,7 @@ public class Field {
 
 
     public void setGameField(int axisX, int axisY, char symbol) {
+        //add try/catch
         gameField[axisX][axisY] = symbol;
     }
 

@@ -34,20 +34,20 @@ public class Game {
         while (endOfGameFlag) {
             field = new Field();
 
-            viewMessage("Field start.\n");
+            displayMessage("Field start.\n");
 
-            viewMessage("Enter first name: ");
+            displayMessage("Enter first name: ");
             namePlayer = in.nextLine();
             firstPlayer = new Human(namePlayer);
             //secondPlayer = new Player();
 
             do {
-                viewMessage("You play with human or computer? h/c: ");
+                displayMessage("You play with human or computer? h/c: ");
                 tempOption = in.nextLine();
-                mode = whatChosen(tempOption);
+                mode = chosenMode(tempOption);
                 switch (mode) {
                     case HUMAN:
-                        viewMessage("Enter second name: ");
+                        displayMessage("Enter second name: ");
                         namePlayer = in.nextLine();
                         secondPlayer = new Human(namePlayer);
                         break;
@@ -55,7 +55,7 @@ public class Game {
                         secondPlayer = new Computer();
                         break;
                     default:
-                        viewMessage("Invalid option!!! Try again.");
+                        displayMessage("Invalid option!!! Try again.");
                         flagError = false;
                         break;
                 }
@@ -64,7 +64,7 @@ public class Game {
             flagError = true;
 
             do {
-                viewMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
+                displayMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
                 chosenSymbol = in.nextLine();
                 switch (chosenSymbol.charAt(0)) {
                     case SYMBOL_0:
@@ -74,13 +74,13 @@ public class Game {
                         setSymbol(secondPlayer, firstPlayer);
                         break;
                     default:
-                        viewMessage("Invalid option!!! Try again.");
+                        displayMessage("Invalid option!!! Try again.");
                         flagError = false;
                         break;
                 }
             } while (!flagError);
             while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && firstPlayer.getPlayerSteps() < MAX_STEPS) {
-                viewMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
+                displayMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
                 gameMovies(firstPlayer, flagError,GameMode.HUMAN);
 
                 field.displayField();
@@ -88,16 +88,16 @@ public class Game {
                     break;
                 }
                 if (firstPlayer.getPlayerSteps() >= MAX_STEPS) {
-                    viewMessage("\nStandoff");
+                    displayMessage("\nStandoff");
                     break;
                 }
-                viewMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
+                displayMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
                 gameMovies(secondPlayer, flagError, mode);
                 field.displayField();
 
             }
 
-            viewMessage("Start the new game? y/n: ");
+            displayMessage("Start the new game? y/n: ");
             continueGame = in.nextLine();
 
             flagError = false;
@@ -109,7 +109,7 @@ public class Game {
                     if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
                         endOfGameFlag = false;
                     } else {
-                        viewMessage("Invalid option!!! Try again.");
+                        displayMessage("Invalid option!!! Try again.");
 
                     }
                 }
@@ -118,7 +118,7 @@ public class Game {
 
         }
 
-        viewMessage("\nEnd of game...");
+        displayMessage("\nEnd of game...");
         in.nextLine();
     }
 
@@ -197,11 +197,11 @@ public class Game {
 
     }
 
-    private void viewMessage(String string) {
+    private void displayMessage(String string) {
         System.out.println(string);
     }
 
-    private GameMode whatChosen(String chosen) {
+    private GameMode chosenMode(String chosen) {
         if (chosen.charAt(0) == 'h' || chosen.charAt(0) == 'H') {
             return GameMode.HUMAN;
         } else {

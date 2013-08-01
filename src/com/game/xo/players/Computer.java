@@ -12,8 +12,17 @@ public class Computer extends Player {
         super(name);
     }
 
-    public void primaryStage(char[][] tempField, int playerX, int playerY) {
+    public int getPcX() {
+        return pcX;
+    }
+
+    public int getPcY() {
+        return pcY;
+    }
+
+    public boolean primaryStage(char[][] tempField, int playerX, int playerY) {
         Random rn = new Random();
+
         do {
             pcX = rn.nextInt(tempField.length);
             System.out.println(pcX + " " + playerX);
@@ -22,5 +31,6 @@ public class Computer extends Player {
 
 
         } while (pcX == playerX && pcY == playerY);
+        return true;
     }
 }

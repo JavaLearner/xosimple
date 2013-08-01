@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 public class Game {
     public final int MAX_STEPS = 9;
-    private final char HUMAN_PLAY = 'h';
-    private final char COMPUTER_PLAY = 'c';
     private final char EMPTY_CELL = ' ';
     private final char SYMBOL_X = 'x';
     private final char SYMBOL_0 = '0';
@@ -18,6 +16,11 @@ public class Game {
     private final int SIZE = 3;
     private Scanner in = new Scanner(System.in);
     private Field field;
+    private enum GameMode {
+        HUMAN, COMPUTER, ERROR
+    }
+    private Human firstPlayer;
+    private Player secondPlayer;
 
     public void createGame() {
         boolean flagError = true;//false when no errors
@@ -26,7 +29,7 @@ public class Game {
         String namePlayer;
         String chosenSymbol;
         String tempOption;
-        char chosenOption;
+        GameMode mode;
 
         while (endOfGameFlag) {
             field = new Field();
@@ -35,22 +38,21 @@ public class Game {
 
             viewMessage("Enter first name: ");
             namePlayer = in.nextLine();
-            Player firstPlayer = new Human(namePlayer);
-            Player secondPlayer = new Player();
+            firstPlayer = new Human(namePlayer);
+            //secondPlayer = new Player();
 
-            //check creation second player????????
             do {
                 viewMessage("You play with human or computer? h/c: ");
                 tempOption = in.nextLine();
-                chosenOption = whatChosen(tempOption);
-                switch (chosenOption) {
-                    case COMPUTER_PLAY:
-                        secondPlayer = new Computer();
-                        break;
-                    case HUMAN_PLAY:
+                mode = whatChosen(tempOption);
+                switch (mode) {
+                    case HUMAN:
                         viewMessage("Enter second name: ");
                         namePlayer = in.nextLine();
                         secondPlayer = new Human(namePlayer);
+                        break;
+                    case COMPUTER:
+                        secondPlayer = new Computer();
                         break;
                     default:
                         viewMessage("Invalid option!!! Try again.");
@@ -77,9 +79,10 @@ public class Game {
                         break;
                 }
             } while (!flagError);
-            while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && secondPlayer.getPlayerSteps() < MAX_STEPS) {
+            while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && firstPlayer.getPlayerSteps() < MAX_STEPS) {
                 viewMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
-                gameMovies(firstPlayer, flagError);
+                gameMovies(firstPlayer, flagError,GameMode.HUMAN);
+
                 field.displayField();
                 if (firstPlayer.getYouWin()) {
                     break;
@@ -89,7 +92,7 @@ public class Game {
                     break;
                 }
                 viewMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
-                gameMovies(secondPlayer, flagError);
+                gameMovies(secondPlayer, flagError, mode);
                 field.displayField();
 
             }
@@ -119,9 +122,9 @@ public class Game {
         in.nextLine();
     }
 
-    public void gameMovies(Player player, boolean flagError) {
+    public void gameMovies(Player player, boolean flagError, GameMode mode) {
         while (flagError && !player.getYouWin()) {
-            getPlayerStep();
+            getPlayerStep(mode);
             try {
                 if ((player.getPlayerSymbol() == SYMBOL_X) && (field.getGameField(axisX, axisY) == EMPTY_CELL)) {
                     flagError = checkWin(player, flagError);
@@ -145,16 +148,29 @@ public class Game {
     }
 
     //add - when play computer
-    private void getPlayerStep() {
-        System.out.print("Enter coordinate (x, ): ");
-        axisX = in.nextInt();
-        System.out.print("Enter coordinate ( ,y): ");
-        axisY = in.nextInt();
+    private void getPlayerStep(GameMode mode) {
+
+        switch(mode){
+           case HUMAN:
+               System.out.print("Enter coordinate (x, ): ");
+               axisX = in.nextInt();
+               System.out.print("Enter coordinate ( ,y): ");
+               axisY = in.nextInt();
+               break;
+           case COMPUTER:
+               Computer computer = (Computer)secondPlayer;
+               if(computer.primaryStage())
+               axisX = computer.getPcX();
+               axisY = computer.getPcY();
+               break;
+           default:
+               break;
+        }
+
     }
 
     private boolean checkWin(Player player, boolean flagError) {
         if (!searchWinner(player.getPlayerSymbol())) {
-            //check if need to add x,y to class player ????
             field.setGameField(axisX, axisY, player.getPlayerSymbol());
             flagError = updates(flagError, player);
         } else {
@@ -185,15 +201,15 @@ public class Game {
         System.out.println(string);
     }
 
-    private char whatChosen(String chosen) {
-        if (chosen.charAt(0) == HUMAN_PLAY || chosen.charAt(0) == 'H') {
-            return HUMAN_PLAY;
+    private GameMode whatChosen(String chosen) {
+        if (chosen.charAt(0) == 'h' || chosen.charAt(0) == 'H') {
+            return GameMode.HUMAN;
         } else {
-            if (chosen.charAt(0) == COMPUTER_PLAY || chosen.charAt(0) == 'C') {
-                return COMPUTER_PLAY;
+            if (chosen.charAt(0) == 'c' || chosen.charAt(0) == 'C') {
+                return GameMode.COMPUTER;
             }
         }
-        return 'e';
+        return GameMode.ERROR;
     }
 
     public boolean searchWinner(char symbol) {

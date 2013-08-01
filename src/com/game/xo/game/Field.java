@@ -10,19 +10,8 @@ public class Field {
     private char gameField[][] = {{EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
             {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}, {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}};
 
-//    public Field() {
-//        globalStepCount = 0;
-//    }
 
-    //    public void setGlobalStepCount(int globalStepCount) {
-//        if (globalStepCount >= 0 && globalStepCount < 9) {
-//            this.globalStepCount = globalStepCount;
-//        }
-//    }
-//
-//    public int getGlobalStepCount() {
-//        return globalStepCount;
-//    }
+
     public void setGameField(int axisX, int axisY, char symbol) {
         gameField[axisX][axisY] = symbol;
     }

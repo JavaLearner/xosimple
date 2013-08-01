@@ -8,18 +8,18 @@ public class Game {
     public final int MAX_STEPS = 9;
     private final char HUMAN_PLAY = 'h';
     private final char COMPUTER_PLAY = 'c';
-    public final char EMPTY_CELL = ' ';
-    public final char SYMBOL_X = 'x';
-    public final char SYMBOL_0 = '0';
-    private int globalStepCount;
+    private final char EMPTY_CELL = ' ';
+    private final char SYMBOL_X = 'x';
+    private final char SYMBOL_0 = '0';
+    private int globalStepCount = 0;
     private int axisX;
     private int axisY;
     private int findWinner;
-    private static final int WINS = 3;
+    private final int SIZE = 3;
     private Scanner in = new Scanner(System.in);
     private Field field;
 
-    public void Game() {
+    public void createGame() {
         boolean flagError = true;//false when no errors
         boolean endOfGameFlag = true;//false if exit from game
         String continueGame;
@@ -46,7 +46,6 @@ public class Game {
                 switch (chosenOption) {
                     case COMPUTER_PLAY:
                         secondPlayer = new Computer();
-
                         break;
                     case HUMAN_PLAY:
                         viewMessage("Enter second name: ");
@@ -66,11 +65,11 @@ public class Game {
                 viewMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
                 chosenSymbol = in.nextLine();
                 switch (chosenSymbol.charAt(0)) {
-                    case '0':
-                        setSymbol(firstPlayer, secondPlayer, field);
+                    case SYMBOL_0:
+                        setSymbol(firstPlayer, secondPlayer);
                         break;
-                    case 'x':
-                        setSymbol(secondPlayer, firstPlayer, field);
+                    case SYMBOL_X:
+                        setSymbol(secondPlayer, firstPlayer);
                         break;
                     default:
                         viewMessage("Invalid option!!! Try again.");
@@ -90,7 +89,7 @@ public class Game {
                     break;
                 }
                 viewMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
-                field.gameMovies(secondPlayer, flagError);
+                gameMovies(secondPlayer, flagError);
                 field.displayField();
 
             }
@@ -102,6 +101,7 @@ public class Game {
             while (!flagError) {
                 if (continueGame.charAt(0) == 'y' || continueGame.charAt(0) == 'Y') {
                     endOfGameFlag = true;
+                    globalStepCount = 0;
                 } else {
                     if (continueGame.charAt(0) == 'n' || continueGame.charAt(0) == 'N') {
                         endOfGameFlag = false;
@@ -123,10 +123,10 @@ public class Game {
         while (flagError && !player.getYouWin()) {
             getPlayerStep();
             try {
-                if ((player.getPlayerSymbol() == SYMBOL_X) && (field.getFieldCell(axisX, axisY) == EMPTY_CELL)) {
+                if ((player.getPlayerSymbol() == SYMBOL_X) && (field.getGameField(axisX, axisY) == EMPTY_CELL)) {
                     flagError = checkWin(player, flagError);
                 } else {
-                    if (field.getFieldCell(axisX, axisY) == EMPTY_CELL) {
+                    if (field.getGameField(axisX, axisY) == EMPTY_CELL) {
                         flagError = checkWin(player, flagError);
                     }
                 }
@@ -138,8 +138,9 @@ public class Game {
                 field.displayField();
                 flagError = true;
             }
+            flagError = checkWin(player, flagError);
         }
-        flagError = checkWin(player, flagError);
+
 
 
     }
@@ -153,8 +154,9 @@ public class Game {
     }
 
     private boolean checkWin(Player player, boolean flagError) {
-        if (!searchWinner.searchWinner(gameField, player.getPlayerSymbol())) {
-            gameField[axisX][axisY] = player.getPlayerSymbol();
+        if (!searchWinner(player.getPlayerSymbol())) {
+            //check if need to add x,y to class player ????
+            field.setGameField(axisX, axisY, player.getPlayerSymbol());
             flagError = updates(flagError, player);
         } else {
             System.out.println("\n" + player.getName() + " you win!!!\n");
@@ -174,9 +176,9 @@ public class Game {
 
     }
 
-    private void setSymbol(Player player1, Player player2, Field newField) {
-        player1.setPlayerSymbol(newField.SYMBOL_0);
-        player2.setPlayerSymbol(newField.SYMBOL_X);
+    private void setSymbol(Player player1, Player player2) {
+        player1.setPlayerSymbol(SYMBOL_0);
+        player2.setPlayerSymbol(SYMBOL_X);
 
     }
 
@@ -206,19 +208,19 @@ public class Game {
     /*search winner in rows*/
     private boolean rowWinner(char symbol) {
 
-        for (int i = 0; i < tempField.length; i++) {
-            findWinner = rowWinnerSub(i, tempField.length, symbol);
-            if (findWinner == WINS) {
+        for (int i = 0; i < SIZE; i++) {
+            findWinner = rowWinnerSub(i, symbol);
+            if (findWinner == SIZE) {
                 return true;
             }
         }
         return false;
     }
 
-    private int rowWinnerSub(int axisX, int size, char symbol) {
+    private int rowWinnerSub(int axisX, char symbol) {
         int sum = 0;
-        for (int j = 0; j < size; j++) {
-            if (field.getFieldCell(axisX, j) == symbol) {
+        for (int j = 0; j < SIZE; j++) {
+            if (field.getGameField(axisX, j) == symbol) {
                 sum++;
             }
         }
@@ -227,19 +229,19 @@ public class Game {
 
     /*search winner in columns*/
     private boolean columnWinner(char symbol) {
-        for (int i = 0; i < tempField.length; i++) {
-            findWinner = columnWinnerSub(i, tempField.length, symbol);
-            if (findWinner == WINS) {
+        for (int i = 0; i < SIZE; i++) {
+            findWinner = columnWinnerSub(i, symbol);
+            if (findWinner == SIZE) {
                 return true;
             }
         }
         return false;
     }
 
-    private int columnWinnerSub(int axisY, int size, char symbol) {
+    private int columnWinnerSub(int axis, char symbol) {
         int sum = 0;
-        for (int j = 0; j < size; j++) {
-            if (tempField[j][axisY] == symbol) {
+        for (int j = 0; j < SIZE; j++) {
+            if (field.getGameField(j, axisY) == symbol) {
                 sum++;
             }
         }
@@ -249,13 +251,13 @@ public class Game {
     /*search winner in diagonals*/
     private boolean diagonalWinner(char symbol) {
         int i, sum = 0;
-        for (i = 0; i < tempField.length; i++) {
-            if (tempField[i][i] == symbol) {
+        for (i = 0; i < SIZE; i++) {
+            if (field.getGameField(i, i) == symbol) {
                 sum++;
             }
         }
         i = 1;
-        if (sum == WINS || tempField[i][i] == symbol && tempField[i + 1][i - 1] == symbol && tempField[i - 1][i + 1] == symbol) {
+        if (sum == SIZE || field.getGameField(i, i) == symbol && field.getGameField(i + 1, i - 1) == symbol && field.getGameField(i - 1, i + 1) == symbol) {
             return true;
         }
         return false;

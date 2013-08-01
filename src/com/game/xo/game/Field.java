@@ -5,27 +5,32 @@ import com.game.xo.players.Player;
 import java.util.Scanner;
 
 public class Field {
+    private final char EMPTY_CELL = ' ';
     private static final int AMOUNT_CELLS = 3;
     private char gameField[][] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 
+//    public Field() {
+//        globalStepCount = 0;
+//    }
 
-
-    //private Scanner scanner = new Scanner(System.in);
-    //private SearchWinner searchWinner = new SearchWinner();
-
-    public Field() {
-        globalStepCount = 0;
+    //    public void setGlobalStepCount(int globalStepCount) {
+//        if (globalStepCount >= 0 && globalStepCount < 9) {
+//            this.globalStepCount = globalStepCount;
+//        }
+//    }
+//
+//    public int getGlobalStepCount() {
+//        return globalStepCount;
+//    }
+    public void setGameField(int axisX, int axisY, char symbol) {
+            gameField[axisX][axisY] = symbol;
     }
 
-    public void setGlobalStepCount(int globalStepCount) {
-        if (globalStepCount >= 0 && globalStepCount < 9) {
-            this.globalStepCount = globalStepCount;
-        }
+    public char getGameField(int axisX, int axisY) {
+        return gameField[axisX][axisY];
+
     }
 
-    public int getGlobalStepCount() {
-        return globalStepCount;
-    }
 
     public void displayField() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
@@ -45,17 +50,6 @@ public class Field {
         }
 
     }
-
-    public void updateField() {
-
-    }
-
-    public char getFieldCell(int axisX, int axisY) {
-        return gameField[axisX][axisY];
-
-    }
-
-
 
 
 }

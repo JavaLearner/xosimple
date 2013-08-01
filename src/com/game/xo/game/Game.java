@@ -147,7 +147,6 @@ public class Game {
 
     }
 
-    //add - when play computer
     private void getPlayerStep(GameMode mode) {
 
         switch(mode){
@@ -159,9 +158,10 @@ public class Game {
                break;
            case COMPUTER:
                Computer computer = (Computer)secondPlayer;
-               if(computer.primaryStage())
+               if(computer.setFirstSymbol(SIZE, axisX, axisY)) {
                axisX = computer.getPcX();
                axisY = computer.getPcY();
+               }
                break;
            default:
                break;

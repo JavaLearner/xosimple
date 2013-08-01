@@ -1,6 +1,8 @@
 package com.game.xo.players;
 
 
+import com.game.xo.game.Field;
+
 import java.util.Random;
 
 public class Computer extends Player {
@@ -20,13 +22,13 @@ public class Computer extends Player {
         return pcY;
     }
 
-    public boolean primaryStage(char[][] tempField, int playerX, int playerY) {
+    public boolean setFirstSymbol(int size, int playerX, int playerY) {
         Random rn = new Random();
 
         do {
-            pcX = rn.nextInt(tempField.length);
+            pcX = rn.nextInt(size);
             System.out.println(pcX + " " + playerX);
-            pcY = rn.nextInt(tempField.length);
+            pcY = rn.nextInt(size);
             System.out.println(pcY + " " + playerY);
 
 

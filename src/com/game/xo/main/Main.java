@@ -21,7 +21,7 @@ public class Main {
            int y = 0;
 
            ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
-           artificialIntelligence.primaryStage(temp, x, y);
+           artificialIntelligence.setFirstSymbol(temp, x, y);
            */
     }
 }

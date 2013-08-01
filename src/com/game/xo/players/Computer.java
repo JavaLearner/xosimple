@@ -14,13 +14,13 @@ public class Computer extends Player {
 
     public void primaryStage(char[][] tempField, int playerX, int playerY) {
         Random rn = new Random();
-        do{
+        do {
             pcX = rn.nextInt(tempField.length);
             System.out.println(pcX + " " + playerX);
             pcY = rn.nextInt(tempField.length);
             System.out.println(pcY + " " + playerY);
 
 
-        } while(pcX == playerX && pcY == playerY);
+        } while (pcX == playerX && pcY == playerY);
     }
 }

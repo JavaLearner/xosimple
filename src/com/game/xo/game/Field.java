@@ -7,7 +7,8 @@ import java.util.Scanner;
 public class Field {
     private final char EMPTY_CELL = ' ';
     private static final int AMOUNT_CELLS = 3;
-    private char gameField[][] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    private char gameField[][] = {{EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
+            {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}, {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}};
 
 //    public Field() {
 //        globalStepCount = 0;
@@ -23,7 +24,7 @@ public class Field {
 //        return globalStepCount;
 //    }
     public void setGameField(int axisX, int axisY, char symbol) {
-            gameField[axisX][axisY] = symbol;
+        gameField[axisX][axisY] = symbol;
     }
 
     public char getGameField(int axisX, int axisY) {

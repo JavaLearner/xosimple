@@ -12,9 +12,9 @@ import com.game.xo.game.Game;
  */
 public class Main {
 
-       public static void main(String[] args) {
-           Game game = new Game();
-           game.createGame();
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.createGame();
 
            /*char[][] temp = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
            int x = 1;
@@ -23,7 +23,7 @@ public class Main {
            ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
            artificialIntelligence.primaryStage(temp, x, y);
            */
-       }
+    }
 }
 
 

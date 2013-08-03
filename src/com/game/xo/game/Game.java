@@ -14,6 +14,9 @@ public class Game {
     private int axisY;
     private int findWinner;
     private final int SIZE = 3;
+    private final int MAX_INDEX = 2;
+    private final int MIN_INDEX = 0;
+
     private Scanner in = new Scanner(System.in);
     private Field field;
     private enum GameMode {
@@ -44,7 +47,7 @@ public class Game {
             do {
                 displayMessage("You play with human or computer? h/c: ");
                 tempOption = in.nextLine();
-                mode = chosenMode(tempOption);
+                mode = chooseMode(tempOption);
                 switch (mode) {
                     case HUMAN:
                         displayMessage("Enter second name: ");
@@ -124,8 +127,16 @@ public class Game {
 
     public void gameMovies(Player player, boolean flagError, GameMode mode) {
         while (flagError && !player.getYouWin()) {
-            getPlayerStep(mode);
-            try {
+            flagError = getPlayerStep(mode);
+              if(!flagError) {
+
+                System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
+                field.displayField();
+                flagError = true;
+
+              } else{
+
+
                 if ((player.getPlayerSymbol() == SYMBOL_X) && (field.getGameField(axisX, axisY) == EMPTY_CELL)) {
                     flagError = checkWin(player, flagError);
                 } else {
@@ -134,20 +145,17 @@ public class Game {
                     }
                 }
 
-            } catch (ArrayIndexOutOfBoundsException e)
+              }
 
-            {
-                System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
-                field.displayField();
-                flagError = true;
-            }
-            flagError = checkWin(player, flagError);
+
+
+           flagError = checkWin(player, flagError);
         }
 
 
     }
 
-    private void getPlayerStep(GameMode mode) {
+    private boolean getPlayerStep(GameMode mode) {
 
         switch(mode){
            case HUMAN:
@@ -155,7 +163,13 @@ public class Game {
                axisX = in.nextInt();
                System.out.print("Enter coordinate ( ,y): ");
                axisY = in.nextInt();
-               break;
+               if(axisX >= MIN_INDEX && axisX <= MAX_INDEX && axisY >= MIN_INDEX && axisY <= MAX_INDEX) {
+                   return true;
+               }
+               else {
+                   return false;
+               }
+               //break;
            case COMPUTER:
                Computer computer = (Computer)secondPlayer;
                if(computer.setFirstSymbol(SIZE, axisX, axisY)) {
@@ -164,15 +178,15 @@ public class Game {
                }
                break;
            default:
-               break;
+                  break;
         }
-
+        return  true;
     }
 
     private boolean checkWin(Player player, boolean flagError) {
         if (!searchWinner(player.getPlayerSymbol())) {
             field.setGameField(axisX, axisY, player.getPlayerSymbol());
-            flagError = updates(flagError, player);
+            flagError = update(flagError, player);
         } else {
             System.out.println("\n" + player.getName() + " you win!!!\n");
             player.setYouWin(true);
@@ -181,7 +195,7 @@ public class Game {
         return flagError;
     }
 
-    private boolean updates(boolean flagError, Player player) {
+    private boolean update(boolean flagError, Player player) {
         if (flagError) {
             globalStepCount++;
             player.setPlayerSteps(globalStepCount);
@@ -201,7 +215,7 @@ public class Game {
         System.out.println(string);
     }
 
-    private GameMode chosenMode(String chosen) {
+    private GameMode chooseMode(String chosen) {
         if (chosen.charAt(0) == 'h' || chosen.charAt(0) == 'H') {
             return GameMode.HUMAN;
         } else {
@@ -253,7 +267,7 @@ public class Game {
         return false;
     }
 
-    private int columnWinnerSub(int axis, char symbol) {
+    private int columnWinnerSub(int axisY, char symbol) {
         int sum = 0;
         for (int j = 0; j < SIZE; j++) {
             if (field.getGameField(j, axisY) == symbol) {

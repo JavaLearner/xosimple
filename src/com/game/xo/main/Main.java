@@ -16,13 +16,7 @@ public class Main {
         Game game = new Game();
         game.createGame();
 
-           /*char[][] temp = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
-           int x = 1;
-           int y = 0;
 
-           ArtificialIntelligence artificialIntelligence = new ArtificialIntelligence();
-           artificialIntelligence.setFirstSymbol(temp, x, y);
-           */
     }
 }
 

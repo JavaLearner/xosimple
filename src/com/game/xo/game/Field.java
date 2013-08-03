@@ -12,9 +12,15 @@ public class Field {
 
 
 
-    public void setGameField(int axisX, int axisY, char symbol) {
+    public boolean setGameField(int axisX, int axisY, char symbol) {
         //add try/catch
+        try{
         gameField[axisX][axisY] = symbol;
+            return  true;
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+                return false;
+        }
     }
 
     public char getGameField(int axisX, int axisY) {

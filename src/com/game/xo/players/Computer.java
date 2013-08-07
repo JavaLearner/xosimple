@@ -1,17 +1,15 @@
 package com.game.xo.players;
 
 
-import com.game.xo.game.Field;
-
 import java.util.Random;
 
 public class Computer extends Player {
-    private static final String name = "Computer";
+    private static final String NAME = "Computer";
     private int pcX;
     private int pcY;
 
     public Computer() {
-        super(name);
+        super(NAME);
     }
 
     public int getPcX() {
@@ -23,15 +21,13 @@ public class Computer extends Player {
     }
 
     public boolean setFirstSymbol(int size, int playerX, int playerY) {
-        Random rn = new Random();
+        Random randomGenerator = new Random();
 
         do {
-            pcX = rn.nextInt(size);
+            pcX = randomGenerator.nextInt(size);
             System.out.println(pcX + " " + playerX);
-            pcY = rn.nextInt(size);
+            pcY = randomGenerator.nextInt(size);
             System.out.println(pcY + " " + playerY);
-
-
         } while (pcX == playerX && pcY == playerY);
         return true;
     }

@@ -1,0 +1,12 @@
+package com.game.xo.input;
+
+import java.util.Scanner;
+
+public class InputDataString implements IInputData {
+    private Scanner in = new Scanner(System.in);
+
+    public String getData() {
+       String message = in.nextLine();
+        return message;
+    }
+}

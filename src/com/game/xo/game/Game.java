@@ -72,9 +72,8 @@ public class Game {
 
             do {
                 displayMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
-                System.out.println(chosenSymbol.charAt(0));
                 chosenSymbol = inputData.getData();
-                System.out.println(chosenSymbol.charAt(0));
+
                 //add - check if chosen x/X or 0.
                 switch (chosenSymbol.charAt(0)) {
                     case SYMBOL_0:
@@ -138,6 +137,7 @@ public class Game {
         while (flagError && !player.getYouWin()) {
 
             flagError = getPlayerStep(mode);
+
             flagError = checkWin(player, flagError);
 
 
@@ -155,19 +155,16 @@ public class Game {
                 axisX = inputDataNumber.getNumber();
                 System.out.print("Enter coordinate ( ,y): ");
                 axisY = inputDataNumber.getNumber();
-                if (axisX >= MIN_INDEX && axisX <= MAX_INDEX && axisY >= MIN_INDEX && axisY <= MAX_INDEX) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return  true;
 
             case COMPUTER:
                 Computer computer = (Computer) secondPlayer;
                 if (computer.setFirstSymbol(SIZE, axisX, axisY)) {
                     axisX = computer.getPcX();
                     axisY = computer.getPcY();
+                    return true;
                 }
-                return true;
+                return false;
             default:
                 return false;
         }
@@ -175,8 +172,8 @@ public class Game {
     }
 
     private boolean checkWin(Player player, boolean flagError) {
-        if (!searchWinner(player.getPlayerSymbol())) {
-            if (field.getGameField(axisX, axisY) == EMPTY_CELL) {
+        if (!searchWinner(player.getPlayerSymbol()) && checkCoordinates()) {
+            if (field.getGameField(axisX, axisY) == EMPTY_CELL ) {
                 field.setGameField(axisX, axisY, player.getPlayerSymbol());
                 flagError = update(flagError, player);
                 if (searchWinner(player.getPlayerSymbol())) {
@@ -184,19 +181,22 @@ public class Game {
                     player.setYouWin(true);
                     flagError = false;
                 }
-            } else {
-                System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
-                field.displayField();
-                flagError = true;
             }
-        } else {
-            System.out.println("\n" + player.getName() + " you win!!!\n");
-            player.setYouWin(true);
-            flagError = false;
+       } else {
+            System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
+            field.displayField();
+            flagError = true;
         }
+
         return flagError;
     }
-
+ private boolean checkCoordinates() {
+     if (axisX >= MIN_INDEX && axisX <= MAX_INDEX && axisY >= MIN_INDEX && axisY <= MAX_INDEX) {
+         return true;
+     } else {
+         return false;
+     }
+ }
     private boolean update(boolean flagError, Player player) {
         if (flagError) {
             globalStepCount++;

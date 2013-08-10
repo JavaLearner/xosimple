@@ -92,7 +92,7 @@ public class Game {
             } while (!flagError);
             while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && firstPlayer.getPlayerSteps() < MAX_STEPS) {
                 displayMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
-                gameMovies(firstPlayer, flagError, GameMode.HUMAN);
+                 gameMovies(firstPlayer, flagError, GameMode.HUMAN);
 
                 field.displayField();
                 if (firstPlayer.getYouWin()) {

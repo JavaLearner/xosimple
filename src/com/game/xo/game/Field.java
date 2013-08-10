@@ -1,8 +1,5 @@
 package com.game.xo.game;
 
-import com.game.xo.players.Player;
-
-import java.util.Scanner;
 
 public class Field {
     private final char EMPTY_CELL = ' ';

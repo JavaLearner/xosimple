@@ -6,9 +6,6 @@ public class Player {
     private char playerSymbol;
     private boolean youWin = false;
 
-    public Player() {
-        gameSteps = 0;
-    }
 
     public Player(String name) {
         this.name = name;

@@ -14,7 +14,7 @@ public class Game {
     private static int axisY;
     private int findWinner;
     private final int SIZE = 3;
-    private final int MAX_INDEX = 3;
+    private final int MAX_INDEX = 2;
     private final int MIN_INDEX = 0;
 
     //private Scanner in = new Scanner(System.in);
@@ -41,7 +41,7 @@ public class Game {
         while (endOfGameFlag) {
             field = new Field();
 
-            displayMessage("Field start.\n");
+            displayMessage("Game start.\n");
 
             displayMessage("Enter first name: ");
             namePlayer = inputData.getData();
@@ -68,7 +68,7 @@ public class Game {
                 }
             } while (!flagError);
             field.displayField();
-            flagError = true;
+            //flagError = true;
 
             do {
                 displayMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
@@ -136,14 +136,11 @@ public class Game {
 
     public void gameMovies(Player player, boolean flagError, GameMode mode) {
         while (flagError && !player.getYouWin()) {
-            //flagError = checkWin(player, flagError);
+
             flagError = getPlayerStep(mode);
             flagError = checkWin(player, flagError);
-            if (searchWinner(player.getPlayerSymbol())) {
-                System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
-                field.displayField();
-                flagError = true;
-            }
+
+
         }
 
 
@@ -158,7 +155,7 @@ public class Game {
                 axisX = inputDataNumber.getNumber();
                 System.out.print("Enter coordinate ( ,y): ");
                 axisY = inputDataNumber.getNumber();
-                if (axisX >= MIN_INDEX && axisX < MAX_INDEX && axisY >= MIN_INDEX && axisY < MAX_INDEX) {
+                if (axisX >= MIN_INDEX && axisX <= MAX_INDEX && axisY >= MIN_INDEX && axisY <= MAX_INDEX) {
                     return true;
                 } else {
                     return false;
@@ -182,6 +179,11 @@ public class Game {
             if (field.getGameField(axisX, axisY) == EMPTY_CELL) {
                 field.setGameField(axisX, axisY, player.getPlayerSymbol());
                 flagError = update(flagError, player);
+                if (searchWinner(player.getPlayerSymbol())) {
+                    System.out.println("\n" + player.getName() + " you win!!!\n");
+                    player.setYouWin(true);
+                    flagError = false;
+                }
             } else {
                 System.out.println("Your coordinates invalid.\nPlease enter correct coordinates.");
                 field.displayField();

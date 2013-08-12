@@ -1,7 +1,7 @@
 package com.game.xo.main;
 
 
-import com.game.xo.game.ConsoleField;
+import com.game.xo.field.ConsoleField;
 import com.game.xo.game.Game;
 import com.game.xo.players.KindPlayer;
 import com.game.xo.players.Player;

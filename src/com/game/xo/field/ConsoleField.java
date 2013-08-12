@@ -1,4 +1,4 @@
-package com.game.xo.game;
+package com.game.xo.field;
 
 
 import com.game.xo.display.ConsoleDisplay;

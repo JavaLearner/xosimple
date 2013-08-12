@@ -1,6 +1,7 @@
 package com.game.xo.game;
 
 import com.game.xo.display.ConsoleDisplay;
+import com.game.xo.field.ConsoleField;
 import com.game.xo.input.InputDataString;
 import com.game.xo.players.KindPlayer;
 import com.game.xo.players.Player;

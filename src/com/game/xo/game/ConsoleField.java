@@ -1,22 +1,22 @@
 package com.game.xo.game;
 
 
-public class Field {
+import com.game.xo.display.ConsoleDisplay;
+
+public class ConsoleField {
     private final char EMPTY_CELL = ' ';
     private static final int AMOUNT_CELLS = 3;
     private char gameField[][] = {{EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
             {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}, {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}};
 
 
-
     public boolean setGameField(int axisX, int axisY, char symbol) {
         //add try/catch
-        try{
-        gameField[axisX][axisY] = symbol;
-            return  true;
-        }
-        catch(ArrayIndexOutOfBoundsException e) {
-                return false;
+        try {
+            gameField[axisX][axisY] = symbol;
+            return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
         }
     }
 
@@ -35,11 +35,13 @@ public class Field {
     }
 
     private void displayFieldSub(int axisX) {
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay();
+
         for (int j = 0; j < AMOUNT_CELLS; j++) {
             if (gameField[axisX][j] == EMPTY_CELL) {
-                System.out.print("(" + axisX + "," + j + ") ");
+                consoleDisplay.displayMessage("(" + axisX + "," + j + ") ");
             } else {
-                System.out.print("  " + gameField[axisX][j] + "   ");
+                consoleDisplay.displayMessage("  " + gameField[axisX][j] + "   ");
             }
         }
 

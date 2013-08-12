@@ -1,7 +1,10 @@
 package com.game.xo.main;
 
 
+import com.game.xo.game.ConsoleField;
 import com.game.xo.game.Game;
+import com.game.xo.players.KindPlayer;
+import com.game.xo.players.Player;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,11 +16,22 @@ import com.game.xo.game.Game;
 public class Main {
 
     public static void main(String[] args) {
-        Game game = new Game();
+        KindPlayer kindPlayer = new KindPlayer();
+        ConsoleField consoleField = new ConsoleField();
+
+        Player firstPlayer = kindPlayer.chooseKind();
+        Player secondPlayer = kindPlayer.chooseKind();
+
+
+        Game game = new Game(firstPlayer, secondPlayer, consoleField);
         game.createGame();
 
 
     }
+
+
+
+
 }
 
 

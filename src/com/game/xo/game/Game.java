@@ -1,9 +1,9 @@
 package com.game.xo.game;
 
 import com.game.xo.display.ConsoleDisplay;
-import com.game.xo.input.InputDataNumber;
 import com.game.xo.input.InputDataString;
-import com.game.xo.players.*;
+import com.game.xo.players.KindPlayer;
+import com.game.xo.players.Player;
 
 
 public class Game {
@@ -22,15 +22,12 @@ public class Game {
 
 
     private ConsoleField field;
-
-    private enum GameMode {
-        HUMAN, COMPUTER, ERROR
-    }
-
     private Player firstPlayer;
     private Player secondPlayer;
+
     private InputDataString inputData = new InputDataString();
     private ConsoleDisplay consoleDisplay = new ConsoleDisplay();
+    private KindPlayer kindPlayer = new KindPlayer();
 
     public Game(Player firstPlayer, Player secondPlayer, ConsoleField field) {
             this.firstPlayer = firstPlayer;
@@ -43,16 +40,16 @@ public class Game {
         boolean endOfGameFlag = true;//false if exit from game
         String continueGame;
         String chosenSymbol;
-        GameMode mode;
 
         while (endOfGameFlag) {
+            do {
             consoleDisplay.displayMessage("Game start.\n");
-            mode = chooseMode();
+
 
             field.displayField();
 
 
-            do {
+
                 consoleDisplay.displayMessage(firstPlayer.getName() + "\nChoose your symbol x or 0 : ");
                 chosenSymbol = inputData.getData();
 
@@ -74,7 +71,7 @@ public class Game {
             } while (!flagError);
             while (!firstPlayer.getYouWin() && !secondPlayer.getYouWin() && firstPlayer.getPlayerSteps() < MAX_STEPS) {
                 consoleDisplay.displayMessage(firstPlayer.getName() + " your turn. Your symbol: " + firstPlayer.getPlayerSymbol());
-                gameMoves(firstPlayer, flagError, GameMode.HUMAN);
+                gameMoves(firstPlayer, flagError);
 
                 field.displayField();
                 if (firstPlayer.getYouWin()) {
@@ -85,7 +82,7 @@ public class Game {
                     break;
                 }
                 consoleDisplay.displayMessage(secondPlayer.getName() + " your turn. Your symbol: " + secondPlayer.getPlayerSymbol());
-                gameMoves(secondPlayer, flagError, mode);
+                gameMoves(secondPlayer, flagError);
                 field.displayField();
 
             }
@@ -117,45 +114,23 @@ public class Game {
 
 
 
-    public void gameMoves(Player player, boolean flagError, GameMode mode) {
+    public void gameMoves(Player player, boolean flagError) {
+
         while (flagError && !player.getYouWin()) {
 
-            flagError = getPlayerStep(mode);
-
+            if(kindPlayer.getPlayerMove(player,axisX,axisY, SIZE)){
+               axisX = player.getAxisX();
+               axisY = player.getAxisY();
             flagError = checkWin(player, flagError);
-
+            }
 
         }
 
-
-    }
-
-    private boolean getPlayerStep(GameMode mode) {
-        InputDataNumber inputDataNumber = new InputDataNumber();
-        switch (mode) {
-            case HUMAN:
-                //дублирование кода. заменить
-                consoleDisplay.displayMessage("\nEnter coordinate (x, ): ");
-                axisX = inputDataNumber.getNumber();
-                consoleDisplay.displayMessage("Enter coordinate ( ,y): ");
-                axisY = inputDataNumber.getNumber();
-                return true;
-
-            case COMPUTER:
-                Computer computer = (Computer) secondPlayer;
-                if (computer.setFirstSymbol(SIZE, axisX, axisY)) {
-                    axisX = computer.getPcX();
-                    axisY = computer.getPcY();
-                    return true;
-                }
-                return false;
-            default:
-                return false;
-        }
 
     }
 
     private boolean checkWin(Player player, boolean flagError) {
+
         if (!searchWinner(player.getPlayerSymbol()) && checkCoordinates()) {
             if (field.getGameField(axisX, axisY) == EMPTY_CELL) {
                 field.setGameField(axisX, axisY, player.getPlayerSymbol());
@@ -199,16 +174,7 @@ public class Game {
 
     }
 
-    private GameMode chooseMode() {
-        KindPlayer kindPlayer = new KindPlayer();
-        if (kindPlayer.getKind()) {
-            return GameMode.HUMAN;
-        } else {
 
-                return GameMode.COMPUTER;
-            }
-
-    }
 
     public boolean searchWinner(char symbol) {
         if (checkRowWinner(symbol) || checkColumnWinner(symbol) || checkDiagonalWinner(symbol)) {

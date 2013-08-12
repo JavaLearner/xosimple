@@ -5,6 +5,8 @@ public class Player {
     private int gameSteps;
     private char playerSymbol;
     private boolean youWin = false;
+    private  int axisX;
+    private  int axisY;
 
 
     public Player(String name) {
@@ -15,6 +17,22 @@ public class Player {
 
     //getters and setters
 
+
+    public void setAxisX(int axisX) {
+        this.axisX = axisX;
+    }
+
+    public int getAxisX() {
+        return axisX;
+    }
+
+    public void setAxisY(int axisY) {
+        this.axisY = axisY;
+    }
+
+    public int getAxisY() {
+        return axisY;
+    }
 
     public String getName() {
         return name;

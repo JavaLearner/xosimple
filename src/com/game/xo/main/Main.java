@@ -3,7 +3,7 @@ package com.game.xo.main;
 
 import com.game.xo.field.ConsoleField;
 import com.game.xo.game.Game;
-import com.game.xo.players.KindPlayer;
+import com.game.xo.players.Human;
 import com.game.xo.players.Player;
 
 /**
@@ -14,24 +14,20 @@ import com.game.xo.players.Player;
  * simple game "Tic Tac Toe" for console
  */
 public class Main {
+      public Player firstPlayer;
+      public Player secondPlayer;
+      public ConsoleField field;
 
     public static void main(String[] args) {
-        KindPlayer kindPlayer = new KindPlayer();
-        ConsoleField consoleField = new ConsoleField();
-
-        Player firstPlayer = kindPlayer.chooseKind();
-        Player secondPlayer = kindPlayer.chooseKind();
-
-
-        Game game = new Game(firstPlayer, secondPlayer, consoleField);
-        game.createGame();
-
+        chosePlayers();
+        Game game = new Game(firstPlayer, secondPlayer, field);
+        game.startGame();
 
     }
 
+     public static void chosePlayers() {
 
-
-
+     }
 }
 
 

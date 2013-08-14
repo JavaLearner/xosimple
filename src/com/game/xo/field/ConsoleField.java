@@ -11,7 +11,6 @@ public class ConsoleField {
 
 
     public boolean setGameField(int axisX, int axisY, char symbol) {
-        //add try/catch
         try {
             gameField[axisX][axisY] = symbol;
             return true;

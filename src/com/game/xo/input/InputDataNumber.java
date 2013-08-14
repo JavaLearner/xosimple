@@ -3,7 +3,13 @@ package com.game.xo.input;
 
 public class InputDataNumber extends InputDataString {
     public int getNumber() {
-        return Integer.parseInt(getData());
+        int temp = -1;
+        try {
+            temp = Integer.parseInt(getData());
+        } catch (Exception e) {
+
+        }
+        return temp;
     }
 
 }

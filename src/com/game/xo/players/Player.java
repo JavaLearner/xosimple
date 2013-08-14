@@ -5,8 +5,8 @@ public class Player {
     private int gameSteps;
     private char playerSymbol;
     private boolean youWin = false;
-    private  int axisX;
-    private  int axisY;
+    private int axisX;
+    private int axisY;
 
 
     public Player(String name) {
@@ -41,6 +41,7 @@ public class Player {
     public void setPlayerSymbol(char symbol) {
         playerSymbol = symbol;
     }
+
 
     public char getPlayerSymbol() {
         return playerSymbol;

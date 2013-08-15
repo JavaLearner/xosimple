@@ -21,12 +21,18 @@ public class Main {
 
 
     public static void main(String[] args) {
-
+        boolean choiceFlag = true;
         Choice choice = new Choice();
+        do{
         Player firstPlayer = choice.choosePlayer();
         Player secondPlayer = choice.choosePlayer();
-        Game game = new Game(firstPlayer, secondPlayer);
-        game.startGame();
+            if(firstPlayer != null && secondPlayer != null){
+                Game game = new Game(firstPlayer, secondPlayer);
+                game.startGame();
+                choiceFlag = false;
+            }
+
+        }while (choiceFlag);
 
     }
 

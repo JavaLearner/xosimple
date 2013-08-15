@@ -21,6 +21,7 @@ public class Choice implements  IChoice{
             case 'c':
                 return new Computer();
             default:
+                consoleDisplay.displayMessage("Invalid option.\n");
                 return null;
         }
     }

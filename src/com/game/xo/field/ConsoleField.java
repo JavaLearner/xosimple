@@ -3,7 +3,7 @@ package com.game.xo.field;
 
 import com.game.xo.display.ConsoleDisplay;
 
-public class ConsoleField {
+public class ConsoleField implements IField{
     private final char EMPTY_CELL = ' ';
     private static final int AMOUNT_CELLS = 3;
     private char gameField[][] = {{EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},

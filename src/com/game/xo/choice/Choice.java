@@ -15,7 +15,7 @@ public class Choice implements  IChoice{
     public Player choosePlayer() {
         consoleDisplay.displayMessage("Choose player human or computer - h/c: ");
         String choiceString = inputDataString.getData();
-        switch(choiceString.charAt(0)){
+        switch(checkChoice(choiceString.charAt(0))){
             case 'h':
                 return new Human(getPlayerName());
             case 'c':
@@ -30,5 +30,16 @@ public class Choice implements  IChoice{
         consoleDisplay.displayMessage("Enter your name: ");
         name = inputDataString.getData();
         return name;
+    }
+
+    private char checkChoice(char inputChar) {
+        if(inputChar == 'h' || inputChar == 'H'){
+                return 'h';
+        }
+        if(inputChar == 'c' || inputChar == 'C'){
+            return 'c';
+        }
+        return 'e';
+
     }
 }

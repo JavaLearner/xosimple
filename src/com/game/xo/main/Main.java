@@ -14,16 +14,18 @@ import  com.game.xo.game.Game;
  * simple game "Tic Tac Toe" for console
  */
 public class Main {
-      public Player firstPlayer;
-      public Player secondPlayer;
+
       public ConsoleField field;
       public ConsoleDisplay consoleDisplay = new ConsoleDisplay();
 
 
 
     public static void main(String[] args) {
+
         Choice choice = new Choice();
-        Game game = new Game(choice.choosePlayer(), choice.choosePlayer());
+        Player firstPlayer = choice.choosePlayer();
+        Player secondPlayer = choice.choosePlayer();
+        Game game = new Game(firstPlayer, secondPlayer);
         game.startGame();
 
     }

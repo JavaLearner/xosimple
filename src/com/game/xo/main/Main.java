@@ -1,11 +1,11 @@
 package com.game.xo.main;
 
 
+import com.game.xo.display.ConsoleDisplay;
 import com.game.xo.field.ConsoleField;
-import com.game.xo.game.Game;
-import com.game.xo.players.Human;
 import com.game.xo.players.Player;
-
+import com.game.xo.choice.Choice;
+import  com.game.xo.game.Game;
 /**
  * Created with IntelliJ IDEA.
  * User: JL Junior
@@ -17,17 +17,18 @@ public class Main {
       public Player firstPlayer;
       public Player secondPlayer;
       public ConsoleField field;
+      public ConsoleDisplay consoleDisplay = new ConsoleDisplay();
+
+
 
     public static void main(String[] args) {
-        chosePlayers();
-        Game game = new Game(firstPlayer, secondPlayer, field);
+        Choice choice = new Choice();
+        Game game = new Game(choice.choosePlayer(), choice.choosePlayer());
         game.startGame();
 
     }
 
-     public static void chosePlayers() {
 
-     }
 }
 
 

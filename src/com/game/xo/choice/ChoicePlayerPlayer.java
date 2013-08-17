@@ -8,14 +8,14 @@ import com.game.xo.players.Human;
 import com.game.xo.players.Player;
 
 
-public class Choice implements  IChoice{
+public class ChoicePlayerPlayer implements IChoicePlayer {
     ConsoleDisplay consoleDisplay = new ConsoleDisplay();
     InputDataString inputDataString = new InputDataString();
 
     public Player choosePlayer() {
         consoleDisplay.displayMessage("Choose player human or computer - h/c: ");
         String choiceString = inputDataString.getData();
-        switch(checkChoice(choiceString.charAt(0))){
+        switch (checkChoice(choiceString.charAt(0))) {
             case 'h':
                 return new Human(getPlayerName());
             case 'c':
@@ -26,7 +26,7 @@ public class Choice implements  IChoice{
         }
     }
 
-    private String getPlayerName(){
+    private String getPlayerName() {
         String name;
         consoleDisplay.displayMessage("Enter your name: ");
         name = inputDataString.getData();
@@ -34,10 +34,10 @@ public class Choice implements  IChoice{
     }
 
     private char checkChoice(char inputChar) {
-        if(inputChar == 'h' || inputChar == 'H'){
-                return 'h';
+        if (inputChar == 'h' || inputChar == 'H') {
+            return 'h';
         }
-        if(inputChar == 'c' || inputChar == 'C'){
+        if (inputChar == 'c' || inputChar == 'C') {
             return 'c';
         }
         return 'e';

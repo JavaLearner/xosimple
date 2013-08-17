@@ -1,11 +1,12 @@
 package com.game.xo.main;
 
 
+import com.game.xo.choice.ChoicePlayerPlayer;
 import com.game.xo.display.ConsoleDisplay;
 import com.game.xo.field.ConsoleField;
 import com.game.xo.players.Player;
-import com.game.xo.choice.Choice;
-import  com.game.xo.game.Game;
+import com.game.xo.game.Game;
+
 /**
  * Created with IntelliJ IDEA.
  * User: JL Junior
@@ -15,26 +16,32 @@ import  com.game.xo.game.Game;
  */
 public class Main {
 
-      public ConsoleField field;
-      public ConsoleDisplay consoleDisplay = new ConsoleDisplay();
-
+//    public ConsoleField field;
+//    public ConsoleDisplay consoleDisplay = new ConsoleDisplay();
 
 
     public static void main(String[] args) {
         boolean choiceFlag = true;
-        Choice choice = new Choice();
-        do{
-        Player firstPlayer = choice.choosePlayer();
-        Player secondPlayer = choice.choosePlayer();
-            if(firstPlayer != null && secondPlayer != null){
-                Game game = new Game(firstPlayer, secondPlayer);
-                game.startGame();
-                choiceFlag = false;
+        ChoicePlayerPlayer choicePlayer = new ChoicePlayerPlayer();
+        do {
+            Player firstPlayer = choicePlayer.choosePlayer();
+
+            if (firstPlayer != null) {
+                do{
+                Player secondPlayer = choicePlayer.choosePlayer();
+
+                if (secondPlayer != null) {
+                    Game game = new Game(firstPlayer, secondPlayer);
+                    game.startGame();
+                    choiceFlag = false;
+                }
+                } while (choiceFlag);
             }
 
-        }while (choiceFlag);
+        } while (choiceFlag);
 
     }
+
 
 
 }

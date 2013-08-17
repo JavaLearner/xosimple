@@ -2,6 +2,7 @@ package com.game.xo.players;
 
 
 import com.game.xo.field.ConsoleField;
+
 import java.util.Random;
 
 public class Computer extends Player {
@@ -15,12 +16,15 @@ public class Computer extends Player {
 
     public boolean createMove(ConsoleField field, Player player, int size, int globalStepCount) {
 
-        switch(globalStepCount) {
-            case STATE1: return  setFirstSymbol(size, player.getAxisX(), player.getAxisY());
+        switch (globalStepCount) {
+            case STATE1:
+                return setFirstSymbol(size, player.getAxisX(), player.getAxisY());
 
-            case STATE3: return checkIrregularState();
+            case STATE3:
+                return checkIrregularState();
 
-            default: return checkRegularState(field, size);
+            default:
+                return checkRegularState(field, size);
         }
 
 
@@ -39,14 +43,13 @@ public class Computer extends Player {
     }
 
 
-
     private boolean checkIrregularState() {
-         return true;
+        return true;
     }
 
     private boolean checkRegularState(ConsoleField field, int size) {
         //|| checkColumn() || checkDiagonal()
-        if (checkRow(field, size) ) {
+        if (checkRow(field, size)) {
             return true;
         } else {
             return false;
@@ -55,20 +58,19 @@ public class Computer extends Player {
     }
 
     private boolean checkRow(ConsoleField field, int size) {
-        for(int i = 0; i < size; i++){
-           if(field.getGameField(i,i) != this.getPlayerSymbol() && field.getGameField(i,i+1) != this.getPlayerSymbol()){
-               if(field.getGameField(i,i) != this.getPlayerSymbol()) {
-                   setAxisX(i);
-                   setAxisY(2);
-               }
+        for (int i = 0; i < size; i++) {
+            if (field.getGameField(i, i) != this.getPlayerSymbol() && field.getGameField(i, i + 1) != this.getPlayerSymbol()) {
+                if (field.getGameField(i, i) != this.getPlayerSymbol()) {
+                    setAxisX(i);
+                    setAxisY(2);
+                }
 
-               //field.setGameField(i, 2, this.getPlayerSymbol());
-               return true;
-           }
-           else{
-               setFirstSymbol(size, i, 2);
-           }
+                //field.setGameField(i, 2, this.getPlayerSymbol());
+                return true;
+            } else {
+                setFirstSymbol(size, i, 2);
+            }
         }
-        return  true;
+        return true;
     }
 }

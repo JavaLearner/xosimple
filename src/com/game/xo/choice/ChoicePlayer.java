@@ -8,7 +8,7 @@ import com.game.xo.players.Human;
 import com.game.xo.players.Player;
 
 
-public class ChoicePlayerPlayer implements IChoicePlayer {
+public class ChoicePlayer implements IChoicePlayer {
     ConsoleDisplay consoleDisplay = new ConsoleDisplay();
     InputDataString inputDataString = new InputDataString();
 

@@ -1,9 +1,7 @@
 package com.game.xo.main;
 
 
-import com.game.xo.choice.ChoicePlayerPlayer;
-import com.game.xo.display.ConsoleDisplay;
-import com.game.xo.field.ConsoleField;
+import com.game.xo.choice.ChoicePlayer;
 import com.game.xo.players.Player;
 import com.game.xo.game.Game;
 
@@ -22,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
         boolean choiceFlag = true;
-        ChoicePlayerPlayer choicePlayer = new ChoicePlayerPlayer();
+        ChoicePlayer choicePlayer = new ChoicePlayer();
         do {
             Player firstPlayer = choicePlayer.choosePlayer();
 

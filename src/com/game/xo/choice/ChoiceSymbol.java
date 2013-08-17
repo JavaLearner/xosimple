@@ -3,8 +3,11 @@ package com.game.xo.choice;
 
 import com.game.xo.display.ConsoleDisplay;
 import com.game.xo.input.InputDataString;
+import com.game.xo.players.Computer;
 import com.game.xo.players.Human;
 import com.game.xo.players.Player;
+
+import java.util.Random;
 
 public class ChoiceSymbol implements  IChoiceSymbol{
     ConsoleDisplay consoleDisplay = new ConsoleDisplay();
@@ -13,7 +16,7 @@ public class ChoiceSymbol implements  IChoiceSymbol{
     public void chooseSymbol(Player player1, Player player2) {
         boolean choiceFlag = true;
 
-        if(player1 instanceof Human || player2 instanceof Human) {
+        if(player1 instanceof Human ) {
         while (choiceFlag){
         consoleDisplay.displayMessage("Choose symbol x or o : ");
         String choiceString = inputDataString.getData();
@@ -32,9 +35,13 @@ public class ChoiceSymbol implements  IChoiceSymbol{
         }
         }
         }else {
+               if(player1 instanceof Computer ){
+                setSymbolComputerComputer(player1, player2);
+            }
 
         }
     }
+
     private char checkChoice(char inputChar) {
         if (inputChar == 'x' || inputChar == 'X') {
             return 'x';
@@ -45,8 +52,24 @@ public class ChoiceSymbol implements  IChoiceSymbol{
         return 'e';
 
     }
+
     private void setSymbol(Player player1, Player player2) {
         player1.setPlayerSymbol('x');
         player2.setPlayerSymbol('0');
+    }
+    private void setSymbolComputerComputer(Player player1, Player player2) {
+                    Random randomGenerator = new Random();
+            switch (randomGenerator.nextInt(2)){
+                case 0:
+                    setSymbol(player2, player1);
+
+
+                    break;
+                case 1:
+                    setSymbol(player1, player2);
+                    break;
+                default:
+                    break;
+            }
     }
 }

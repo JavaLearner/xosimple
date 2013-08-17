@@ -14,6 +14,22 @@ public class Computer extends Player {
         super(NAME);
     }
 
+    @Override
+    public void setPlayerSymbol(char symbol) {
+        Random randomGenerator = new Random();
+        switch (randomGenerator.nextInt(2)){
+            case 0:
+                super.setPlayerSymbol('0');
+                break;
+            case 1:
+                super.setPlayerSymbol('x');
+                break;
+            default:
+                break;
+        }
+
+    }
+
     public boolean createMove(ConsoleField field, Player player, int size, int globalStepCount) {
 
         switch (globalStepCount) {

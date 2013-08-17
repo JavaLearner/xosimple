@@ -22,7 +22,7 @@ public class Game implements IGame {
     public void startGame() {
         //do{
         consoleDisplay.displayMessage("Game start.");
-
+        chooseSymbol(player1, player2);
 
         //}while(endOfGame);
 

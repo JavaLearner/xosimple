@@ -29,7 +29,6 @@ public class Game implements IGame {
         choiceSymbol.chooseSymbol(player1, player2);
         display.displayMessage(player1.getName() + " your symbol : " + player1.getPlayerSymbol() + "\n");
         display.displayMessage(player2.getName() + " your symbol : " + player2.getPlayerSymbol() + "\n");
-        ConsoleField field = new ConsoleField();
         display.displayMessage("\n");
         field.displayField();
         //}while(endOfGame);

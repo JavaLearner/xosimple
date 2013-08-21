@@ -3,6 +3,7 @@ package com.game.xo.main;
 
 import com.game.xo.choice.ChoicePlayer;
 import com.game.xo.display.ConsoleDisplay;
+import com.game.xo.field.ConsoleField;
 import com.game.xo.players.Player;
 import com.game.xo.game.Game;
 
@@ -21,6 +22,7 @@ public class Main {
 
     public static void main(String[] args) {
         ConsoleDisplay consoleDisplay = new ConsoleDisplay();
+        ConsoleField consoleField = new ConsoleField();
         boolean choiceFlag = true;
         ChoicePlayer choicePlayer = new ChoicePlayer();
         do {
@@ -31,7 +33,7 @@ public class Main {
                 Player secondPlayer = choicePlayer.choosePlayer();
 
                 if (secondPlayer != null) {
-                    Game game = new Game(firstPlayer, secondPlayer, consoleDisplay);
+                    Game game = new Game(firstPlayer, secondPlayer, consoleDisplay,consoleField);
                     game.startGame();
                     choiceFlag = false;
                 }

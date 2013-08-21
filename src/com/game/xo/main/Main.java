@@ -15,11 +15,6 @@ import com.game.xo.game.Game;
  * simple game "Tic Tac Toe" for console
  */
 public class Main {
-
-//    public ConsoleField field;
-
-
-
     public static void main(String[] args) {
         ConsoleDisplay consoleDisplay = new ConsoleDisplay();
         ConsoleField consoleField = new ConsoleField();
@@ -33,7 +28,7 @@ public class Main {
                 Player secondPlayer = choicePlayer.choosePlayer();
 
                 if (secondPlayer != null) {
-                    Game game = new Game(firstPlayer, secondPlayer, consoleDisplay,consoleField);
+                    Game game = new Game(firstPlayer, secondPlayer, consoleDisplay, consoleField);
                     game.startGame();
                     choiceFlag = false;
                 }

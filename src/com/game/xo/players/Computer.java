@@ -1,8 +1,8 @@
 package com.game.xo.players;
 
 
+import com.game.xo.display.IDisplay;
 import com.game.xo.field.ConsoleField;
-
 import java.util.Random;
 
 public class Computer extends Player {
@@ -12,6 +12,26 @@ public class Computer extends Player {
 
     public Computer() {
         super(NAME);
+    }
+
+    @Override
+    public void getCoordinates(IDisplay display, Player player) {
+//        super.getCoordinates(display);    //To change body of overridden methods use File | Settings | File Templates.
+    display.displayMessage("Generate coordinates\n");
+        generateCoordinates(player.getAxisX(), player.getAxisY());
+
+    }
+
+    private void generateCoordinates(int axisX, int axisY) {
+        int size = 2;
+        Random randomGenerator = new Random();
+
+        do {
+            setAxisY(randomGenerator.nextInt(size));
+            System.out.println("\n" + getAxisX() + " " + axisX);
+            setAxisY(randomGenerator.nextInt(size));
+            System.out.println(getAxisY() + " " + axisY);
+        } while (getAxisX() == axisX && getAxisY() == axisY);
     }
 
 //    @Override
@@ -30,23 +50,25 @@ public class Computer extends Player {
 //
 //    }
 
-    public boolean createMove(ConsoleField field, Player player, int size, int globalStepCount) {
+    public boolean createMove(Player player1, Player player2) {
 
-        switch (globalStepCount) {
+        switch (player1.getPlayerSteps()) {
             case STATE1:
-                return setFirstSymbol(size, player.getAxisX(), player.getAxisY());
+                return setFirstSymbol(player1.getAxisX(), player1.getAxisY());
 
             case STATE3:
                 return checkIrregularState();
 
             default:
-                return checkRegularState(field, size);
+//                return checkRegularState(field, size);
+                break;
         }
 
-
+      return true;
     }
 
-    private boolean setFirstSymbol(int size, int playerX, int playerY) {
+    private boolean setFirstSymbol(int playerX, int playerY) {
+        int size = 2;
         Random randomGenerator = new Random();
 
         do {
@@ -84,7 +106,7 @@ public class Computer extends Player {
                 //field.setGameField(i, 2, this.getPlayerSymbol());
                 return true;
             } else {
-                setFirstSymbol(size, i, 2);
+                setFirstSymbol(i, 2);
             }
         }
         return true;

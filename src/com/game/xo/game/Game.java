@@ -5,6 +5,7 @@ import com.game.xo.display.IDisplay;
 import com.game.xo.field.IField;
 import com.game.xo.input.InputDataNumber;
 import com.game.xo.input.InputDataString;
+import com.game.xo.players.Computer;
 import com.game.xo.players.Human;
 import com.game.xo.players.Player;
 
@@ -43,17 +44,13 @@ public class Game implements IGame {
     }
 
     private void gameMoves(Player player1, Player player2) {
-        if (player1 instanceof Human) {
-            boolean exceptionFlag = getCoordinates(player1);
-        }
+        display.displayMessage("Player "+ player1.getName() + ". ");
+        player1.getCoordinates(display, player2);
+        display.displayMessage("Player "+ player2.getName() + ". ");
+        player2.getCoordinates(display, player1);
+//        boolean exceptionFlag = field.setGameField(inputX, inputY, player.getPlayerSymbol());
+//        return  exceptionFlag;
     }
-    private boolean getCoordinates(Player player) {
-        display.displayMessage("Please enter your coordinate (x,): ");
-        int inputX = inputDataNumber.getNumber();
-        display.displayMessage("Please enter your coordinate (,y): ");
-        int inputY = inputDataNumber.getNumber();
-        boolean exceptionFlag = field.setGameField(inputX, inputY, player.getPlayerSymbol());
-        return  exceptionFlag;
-    }
+
 
 }

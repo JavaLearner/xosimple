@@ -1,17 +1,25 @@
 package com.game.xo.players;
 
+import com.game.xo.display.IDisplay;
+import com.game.xo.input.InputDataNumber;
+import com.game.xo.input.InputDataString;
+
 public class Player {
     private String name;
     private int gameSteps;
     private char playerSymbol;
     private boolean youWin = false;
-    private int axisX;
-    private int axisY;
+    private int axisX = -1;
+    private int axisY = -1;
+//    private InputDataString inputDataString;
+    private InputDataNumber inputDataNumber;
+
 
 
     public Player(String name) {
         this.name = name;
         gameSteps = 0;
+        inputDataNumber = new InputDataNumber();
 
     }
 
@@ -61,6 +69,14 @@ public class Player {
 
     public boolean getYouWin() {
         return youWin;
+    }
+
+        public void getCoordinates(IDisplay display, Player player) {
+        display.displayMessage("\nPlease enter your coordinate (x,): ");
+        axisX = inputDataNumber.getNumber();
+        display.displayMessage("\nPlease enter your coordinate (,y): ");
+        axisY = inputDataNumber.getNumber();
+
     }
 
 }

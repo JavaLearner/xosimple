@@ -9,11 +9,10 @@ public class Player {
     private int gameSteps;
     private char playerSymbol;
     private boolean youWin = false;
-    private int axisX = -1;
-    private int axisY = -1;
-//    private InputDataString inputDataString;
+    private int axisX;
+    private int axisY;
+    //    private InputDataString inputDataString;
     private InputDataNumber inputDataNumber;
-
 
 
     public Player(String name) {
@@ -71,7 +70,7 @@ public class Player {
         return youWin;
     }
 
-        public void getCoordinates(IDisplay display, Player player) {
+    public void getCoordinates(IDisplay display) {
         display.displayMessage("\nPlease enter your coordinate (x,): ");
         axisX = inputDataNumber.getNumber();
         display.displayMessage("\nPlease enter your coordinate (,y): ");

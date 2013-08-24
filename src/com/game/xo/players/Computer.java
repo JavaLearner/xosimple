@@ -3,6 +3,7 @@ package com.game.xo.players;
 
 import com.game.xo.display.IDisplay;
 import com.game.xo.field.ConsoleField;
+
 import java.util.Random;
 
 public class Computer extends Player {
@@ -17,38 +18,22 @@ public class Computer extends Player {
     @Override
     public void getCoordinates(IDisplay display, Player player) {
 //        super.getCoordinates(display);    //To change body of overridden methods use File | Settings | File Templates.
-    display.displayMessage("Generate coordinates\n");
-        generateCoordinates(player.getAxisX(), player.getAxisY());
+        display.displayMessage("Generate coordinates\n");
+        generateCoordinates();
 
     }
 
-    private void generateCoordinates(int axisX, int axisY) {
+    private void generateCoordinates() {
         int size = 2;
         Random randomGenerator = new Random();
 
-        do {
-            setAxisY(randomGenerator.nextInt(size));
-            System.out.println("\n" + getAxisX() + " " + axisX);
-            setAxisY(randomGenerator.nextInt(size));
-            System.out.println(getAxisY() + " " + axisY);
-        } while (getAxisX() == axisX && getAxisY() == axisY);
+        setAxisY(randomGenerator.nextInt(size));
+        System.out.println("\n" + "getAxisX() " + getAxisX());
+        setAxisY(randomGenerator.nextInt(size));
+        System.out.println("getAxisY() " + getAxisY());
+
     }
 
-//    @Override
-//    public void setPlayerSymbol(char symbol) {
-//        Random randomGenerator = new Random();
-//        switch (randomGenerator.nextInt(2)){
-//            case 0:
-//                super.setPlayerSymbol('0');
-//                break;
-//            case 1:
-//                super.setPlayerSymbol('x');
-//                break;
-//            default:
-//                break;
-//        }
-//
-//    }
 
     public boolean createMove(Player player1, Player player2) {
 
@@ -64,7 +49,7 @@ public class Computer extends Player {
                 break;
         }
 
-      return true;
+        return true;
     }
 
     private boolean setFirstSymbol(int playerX, int playerY) {

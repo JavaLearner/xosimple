@@ -44,12 +44,19 @@ public class Game implements IGame {
     }
 
     private void gameMoves(Player player1, Player player2) {
-        display.displayMessage("Player "+ player1.getName() + ". ");
-        player1.getCoordinates(display, player2);
-        display.displayMessage("Player "+ player2.getName() + ". ");
-        player2.getCoordinates(display, player1);
+        insertToField(player1);
+        insertToField(player2);
+
+
 //        boolean exceptionFlag = field.setGameField(inputX, inputY, player.getPlayerSymbol());
 //        return  exceptionFlag;
+    }
+
+    private void insertToField(Player player) {
+        do {
+            display.displayMessage("Player " + player.getName() + ". ");
+            player1.getCoordinates(display);
+        } while (field.setGameField(player, display));
     }
 
 

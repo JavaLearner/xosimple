@@ -9,33 +9,33 @@ import com.game.xo.players.Player;
 
 import java.util.Random;
 
-public class ChoiceSymbol implements  IChoiceSymbol{
+public class ChoiceSymbol implements IChoiceSymbol {
     ConsoleDisplay consoleDisplay = new ConsoleDisplay();
     InputDataString inputDataString = new InputDataString();
 
     public void chooseSymbol(Player player1, Player player2) {
         boolean choiceFlag = true;
 
-        if(player1 instanceof Human) {
-        while (choiceFlag){
-        consoleDisplay.displayMessage("Choose symbol x or o : ");
-        String choiceString = inputDataString.getData();
-        switch (checkChoice(choiceString.charAt(0))) {
-            case 'x':
-                setSymbol(player1, player2);
-                choiceFlag = false;
-                break;
-            case '0':
-                setSymbol(player2, player1);
-                choiceFlag = false;
-                break;
-            default:
-                consoleDisplay.displayMessage("Invalid option.\n");
-                break;
-        }
-        }
-        }else {
-               if(player1 instanceof Computer ){
+        if (player1 instanceof Human) {
+            while (choiceFlag) {
+                consoleDisplay.displayMessage("Choose symbol x or o : ");
+                String choiceString = inputDataString.getData();
+                switch (checkChoice(choiceString.charAt(0))) {
+                    case 'x':
+                        setSymbol(player1, player2);
+                        choiceFlag = false;
+                        break;
+                    case '0':
+                        setSymbol(player2, player1);
+                        choiceFlag = false;
+                        break;
+                    default:
+                        consoleDisplay.displayMessage("Invalid option.\n");
+                        break;
+                }
+            }
+        } else {
+            if (player1 instanceof Computer) {
                 setSymbolComputer(player1, player2);
             }
 
@@ -57,21 +57,22 @@ public class ChoiceSymbol implements  IChoiceSymbol{
         player1.setPlayerSymbol('x');
         player2.setPlayerSymbol('0');
     }
-    private void setSymbolComputer(Player player1, Player player2) {
-                    Random randomGenerator = new Random();
-        int temp = randomGenerator.nextInt(2);
-            switch (temp){
-                case 0:
-                    consoleDisplay.displayMessage("generate: " + temp + "\n");
-                    setSymbol(player2, player1);
-                    break;
-                case 1:
-                    consoleDisplay.displayMessage("generate: " + temp + "\n");
 
-                    setSymbol(player1, player2);
-                    break;
-                default:
-                    break;
-            }
+    private void setSymbolComputer(Player player1, Player player2) {
+        Random randomGenerator = new Random();
+        int temp = randomGenerator.nextInt(2);
+        switch (temp) {
+            case 0:
+                consoleDisplay.displayMessage("generate: " + temp + "\n");
+                setSymbol(player2, player1);
+                break;
+            case 1:
+                consoleDisplay.displayMessage("generate: " + temp + "\n");
+
+                setSymbol(player1, player2);
+                break;
+            default:
+                break;
+        }
     }
 }

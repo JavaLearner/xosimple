@@ -2,25 +2,40 @@ package com.game.xo.field;
 
 
 import com.game.xo.display.ConsoleDisplay;
+import com.game.xo.display.IDisplay;
+import com.game.xo.players.Player;
 
 public class ConsoleField implements IField {
     private final char EMPTY_CELL = ' ';
     private static final int AMOUNT_CELLS = 3;
     private char gameField[][] = {{EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
             {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}, {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}};
+    private IDisplay display;
+
+//   public ConsoleField(IDisplay display){
+//       this.display = display;
+//
+//   }
 
 
-    public boolean setGameField(int axisX, int axisY, char symbol) {
+    public boolean setGameField(Player player, IDisplay display) {
         try {
-            gameField[axisX][axisY] = symbol;
+            if (gameField[player.getAxisX()][player.getAxisY()] == ' ') {
+                gameField[player.getAxisX()][player.getAxisY()] = player.getPlayerSymbol();
+            } else {
+                display.displayMessage("The cell not empty. Choose another one.");
+                return false;
+            }
             return true;
         } catch (ArrayIndexOutOfBoundsException e) {
+            display.displayMessage("Invalid coordinates. Choose again: ");
             return false;
         }
     }
 
-    public char getGameField(int axisX, int axisY) {
-        return gameField[axisX][axisY];
+
+    public char getGameField(Player player) {
+        return gameField[player.getAxisX()][player.getAxisY()];
 
     }
 

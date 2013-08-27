@@ -18,7 +18,7 @@ import com.game.xo.game.Game;
 public class Main {
     public static void main(String[] args) {
         ConsoleDisplay consoleDisplay = new ConsoleDisplay();
-        ConsoleField consoleField = new ConsoleField();
+        ConsoleField consoleField = new ConsoleField(consoleDisplay);
         boolean choiceFlag = true;
         ChoicePlayer choicePlayer = new ChoicePlayer();
         do {

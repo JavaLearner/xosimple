@@ -73,8 +73,11 @@ public class Player {
     public void getCoordinates(IDisplay display) {
         display.displayMessage("\nPlease enter your coordinate (x,): ");
         axisX = inputDataNumber.getNumber();
-        display.displayMessage("\nPlease enter your coordinate (,y): ");
+        display.displayMessage("player x: " + axisX + "\n");
+        display.displayMessage("Please enter your coordinate (,y): ");
         axisY = inputDataNumber.getNumber();
+        display.displayMessage("player y: " + axisY + "\n");
+
 
     }
 

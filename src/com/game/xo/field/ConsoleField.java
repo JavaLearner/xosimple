@@ -12,15 +12,15 @@ public class ConsoleField implements IField {
             {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}, {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}};
     private IDisplay display;
 
-//   public ConsoleField(IDisplay display){
-//       this.display = display;
-//
-//   }
+   public ConsoleField(IDisplay display){
+       this.display = display;
+
+   }
 
 
     public boolean setGameField(Player player, IDisplay display) {
         try {
-            if (gameField[player.getAxisX()][player.getAxisY()] == ' ') {
+            if (gameField[player.getAxisX()][player.getAxisY()] == EMPTY_CELL) {
                 gameField[player.getAxisX()][player.getAxisY()] = player.getPlayerSymbol();
             } else {
                 display.displayMessage("The cell not empty. Choose another one.");
@@ -43,9 +43,9 @@ public class ConsoleField implements IField {
     public void displayField() {
         for (int i = 0; i < AMOUNT_CELLS; i++) {
             displayFieldSub(i);
-            System.out.println();
+            display.displayMessage("\n");
         }
-        System.out.println();
+        display.displayMessage("\n");
     }
 
     private void displayFieldSub(int axisX) {

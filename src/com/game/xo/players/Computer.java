@@ -3,6 +3,7 @@ package com.game.xo.players;
 
 import com.game.xo.display.IDisplay;
 import com.game.xo.field.ConsoleField;
+import com.game.xo.field.IField;
 
 import java.util.Random;
 
@@ -16,18 +17,17 @@ public class Computer extends Player {
     }
 
     @Override
-    public void getCoordinates(IDisplay display, Player player) {
-//        super.getCoordinates(display);    //To change body of overridden methods use File | Settings | File Templates.
+    public void getCoordinates(IDisplay display) {
         display.displayMessage("Generate coordinates\n");
         generateCoordinates();
 
     }
 
     private void generateCoordinates() {
-        int size = 2;
+        int size = 3;
         Random randomGenerator = new Random();
 
-        setAxisY(randomGenerator.nextInt(size));
+        setAxisX(randomGenerator.nextInt(size));
         System.out.println("\n" + "getAxisX() " + getAxisX());
         setAxisY(randomGenerator.nextInt(size));
         System.out.println("getAxisY() " + getAxisY());
@@ -53,7 +53,7 @@ public class Computer extends Player {
     }
 
     private boolean setFirstSymbol(int playerX, int playerY) {
-        int size = 2;
+        int size = 3;
         Random randomGenerator = new Random();
 
         do {
@@ -70,30 +70,30 @@ public class Computer extends Player {
         return true;
     }
 
-    private boolean checkRegularState(ConsoleField field, int size) {
-        //|| checkColumn() || checkDiagonal()
-        if (checkRow(field, size)) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    private boolean checkRow(ConsoleField field, int size) {
-        for (int i = 0; i < size; i++) {
-            if (field.getGameField(i, i) != this.getPlayerSymbol() && field.getGameField(i, i + 1) != this.getPlayerSymbol()) {
-                if (field.getGameField(i, i) != this.getPlayerSymbol()) {
-                    setAxisX(i);
-                    setAxisY(2);
-                }
-
-                //field.setGameField(i, 2, this.getPlayerSymbol());
-                return true;
-            } else {
-                setFirstSymbol(i, 2);
-            }
-        }
-        return true;
-    }
+//    private boolean checkRegularState(IField field, int size) {
+//        //|| checkColumn() || checkDiagonal()
+//        if (checkRow(field, size)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//
+//    }
+//
+//    private boolean checkRow(IField field, int size) {
+//        for (int i = 0; i < size; i++) {
+//            if (field.getGameField(this) != this.getPlayerSymbol() && field.getGameField(this) != this.getPlayerSymbol()) {
+//                if (field.getGameField(this) != this.getPlayerSymbol()) {
+//                    setAxisX(i);
+//                    setAxisY(2);
+//                }
+//
+//                //field.setGameField(i, 2, this.getPlayerSymbol());
+//                return true;
+//            } else {
+//                setFirstSymbol(i, 2);
+//            }
+//        }
+//        return true;
+//    }
 }

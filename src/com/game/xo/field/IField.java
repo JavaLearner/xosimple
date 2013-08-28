@@ -6,7 +6,7 @@ import com.game.xo.players.Player;
 
 public interface IField {
     public boolean setGameField(Player player, IDisplay display);
-
+    public void clearField();
     public char getGameField(Player player);
 
     public void displayField();

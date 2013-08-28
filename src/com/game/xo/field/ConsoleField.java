@@ -8,15 +8,22 @@ import com.game.xo.players.Player;
 public class ConsoleField implements IField {
     private final char EMPTY_CELL = ' ';
     private static final int AMOUNT_CELLS = 3;
-    private char gameField[][] = {{EMPTY_CELL, EMPTY_CELL, EMPTY_CELL},
-            {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}, {EMPTY_CELL, EMPTY_CELL, EMPTY_CELL}};
+    private char gameField[][] = new char[AMOUNT_CELLS][AMOUNT_CELLS];
     private IDisplay display;
 
-   public ConsoleField(IDisplay display){
-       this.display = display;
+    public ConsoleField(IDisplay display) {
+        this.display = display;
+        clearField();
 
-   }
-
+    }
+     //refactoring!!!!!!!!
+    public void clearField() {
+        for (int i = 0; i < gameField.length; i++) {
+            for (int j = 0; j < gameField.length; j++) {
+                gameField[i][j] = EMPTY_CELL;
+            }
+        }
+    }
 
     public boolean setGameField(Player player, IDisplay display) {
         try {
@@ -28,7 +35,7 @@ public class ConsoleField implements IField {
             }
             return true;
         } catch (ArrayIndexOutOfBoundsException e) {
-            display.displayMessage("Invalid coordinates. Choose again: ");
+            display.displayMessage("Invalid coordinates. Choose again.\n");
             return false;
         }
     }

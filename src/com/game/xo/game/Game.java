@@ -32,29 +32,54 @@ public class Game implements IGame {
 
     public void startGame() {
         ChoiceSymbol choiceSymbol = new ChoiceSymbol();
-
+        boolean flagContinue;
         do {
             display.displayMessage("Game start.\n");
             choiceSymbol.chooseSymbol(player1, player2);
-            do{
-            display.displayMessage(player1.getName() + " your symbol : " + player1.getPlayerSymbol() + "\n");
-            display.displayMessage(player2.getName() + " your symbol : " + player2.getPlayerSymbol() + "\n");
-            display.displayMessage("\n");
-            field.displayField();
-            gameMoves(player1, player2);
-            }while (globalSteps < MAX_CELLS);
-        } while (!endOfGame);
+            do {
+                display.displayMessage(player1.getName() + " your symbol : " + player1.getPlayerSymbol() + "\n");
+                display.displayMessage(player2.getName() + " your symbol : " + player2.getPlayerSymbol() + "\n");
+                display.displayMessage("\n");
+                field.displayField();
+                gameMoves(player1, player2);
+                display.displayMessage("globalSteps " + globalSteps + "\n");
 
-        if(globalSteps >= MAX_CELLS){
-           display.displayMessage("Standoff");
-        }
+            } while (globalSteps < MAX_CELLS);
+            if (globalSteps >= MAX_CELLS) {
+                display.displayMessage("Standoff");
+            }
+            do {
+
+
+            display.displayMessage("You want to start new game? y/n : ");
+            String choiceString = inputDataString.getData();
+            switch (checkChoice(choiceString.charAt(0))) {
+                case 'y':
+                    field.clearField();
+                    globalSteps = 0;
+                    flagContinue = true;
+                    break;
+                case 'n':
+                    endOfGame = true;
+                    flagContinue = true;
+                    break;
+                default:
+                    display.displayMessage("Invalid option.\n");
+                    flagContinue = false;
+                    break;
+            }
+            }while (!flagContinue);
+        } while (!endOfGame);
 
 
     }
 
     private void gameMoves(Player player1, Player player2) {
         insertToField(player1);
-        insertToField(player2);
+        if (globalSteps < MAX_CELLS) {
+            insertToField(player2);
+        }
+
         //add check if game end and player want to start new game
         //endOfGame = true;
     }
@@ -66,8 +91,19 @@ public class Game implements IGame {
         } while (!field.setGameField(player, display));
         globalSteps++;
         player.setPlayerSteps(globalSteps);
+        display.displayMessage("Player Steps " + player.getPlayerSteps());
+        display.displayMessage("\n");
         field.displayField();
     }
 
+    private char checkChoice(char inputChar) {
+        if (inputChar == 'y' || inputChar == 'Y') {
+            return 'y';
+        }
+        if (inputChar == 'n' || inputChar == 'N') {
+            return 'n';
+        }
+        return 'e';
 
+    }
 }

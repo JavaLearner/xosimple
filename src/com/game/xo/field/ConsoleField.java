@@ -16,7 +16,8 @@ public class ConsoleField implements IField {
         clearField();
 
     }
-     //refactoring!!!!!!!!
+
+    //refactoring!!!!!!!!
     public void clearField() {
         for (int i = 0; i < gameField.length; i++) {
             for (int j = 0; j < gameField.length; j++) {
@@ -41,10 +42,10 @@ public class ConsoleField implements IField {
     }
 
 
-    public char getGameField(Player player) {
-        return gameField[player.getAxisX()][player.getAxisY()];
-
-    }
+//    public char getGameField(Player player) {
+//        return gameField[player.getAxisX()][player.getAxisY()];
+//
+//    }
 
 
     public void displayField() {

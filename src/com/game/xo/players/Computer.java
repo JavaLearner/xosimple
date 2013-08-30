@@ -39,10 +39,11 @@ public class Computer extends Player {
 
         switch (player1.getPlayerSteps()) {
             case STATE1:
-                return setFirstSymbol(player1.getAxisX(), player1.getAxisY());
-
+//                return setFirstSymbol(player1.getAxisX(), player1.getAxisY());
+                return true;
             case STATE3:
-                return checkIrregularState();
+//                return checkIrregularState();
+                return true;
 
             default:
 //                return checkRegularState(field, size);
@@ -52,23 +53,23 @@ public class Computer extends Player {
         return true;
     }
 
-    private boolean setFirstSymbol(int playerX, int playerY) {
-        int size = 3;
-        Random randomGenerator = new Random();
+//    private boolean setFirstSymbol(int playerX, int playerY) {
+//        int size = 3;
+//        Random randomGenerator = new Random();
+//
+//        do {
+//            setAxisY(randomGenerator.nextInt(size));
+//            System.out.println("\n" + getAxisX() + " " + playerX);
+//            setAxisY(randomGenerator.nextInt(size));
+//            System.out.println(getAxisY() + " " + playerY);
+//        } while (getAxisX() == playerX && getAxisY() == playerY);
+//        return true;
+//    }
 
-        do {
-            setAxisY(randomGenerator.nextInt(size));
-            System.out.println("\n" + getAxisX() + " " + playerX);
-            setAxisY(randomGenerator.nextInt(size));
-            System.out.println(getAxisY() + " " + playerY);
-        } while (getAxisX() == playerX && getAxisY() == playerY);
-        return true;
-    }
 
-
-    private boolean checkIrregularState() {
-        return true;
-    }
+//    private boolean checkIrregularState() {
+//        return true;
+//    }
 
 //    private boolean checkRegularState(IField field, int size) {
 //        //|| checkColumn() || checkDiagonal()

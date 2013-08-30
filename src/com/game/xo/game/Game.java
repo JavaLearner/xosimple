@@ -32,7 +32,6 @@ public class Game implements IGame {
 
     public void startGame() {
         ChoiceSymbol choiceSymbol = new ChoiceSymbol();
-        boolean flagContinue;
         do {
             display.displayMessage("Game start.\n");
             choiceSymbol.chooseSymbol(player1, player2);
@@ -45,30 +44,10 @@ public class Game implements IGame {
                 display.displayMessage("globalSteps " + globalSteps + "\n");
 
             } while (globalSteps < MAX_CELLS);
-            if (globalSteps >= MAX_CELLS) {
-                display.displayMessage("Standoff");
+            if (globalSteps >= MAX_CELLS && !player1.getYouWin() && !player2.getYouWin()) {
+                display.displayMessage("Standoff\n");
             }
-            do {
-
-
-            display.displayMessage("You want to start new game? y/n : ");
-            String choiceString = inputDataString.getData();
-            switch (checkChoice(choiceString.charAt(0))) {
-                case 'y':
-                    field.clearField();
-                    globalSteps = 0;
-                    flagContinue = true;
-                    break;
-                case 'n':
-                    endOfGame = true;
-                    flagContinue = true;
-                    break;
-                default:
-                    display.displayMessage("Invalid option.\n");
-                    flagContinue = false;
-                    break;
-            }
-            }while (!flagContinue);
+            getChoice();
         } while (!endOfGame);
 
 
@@ -80,8 +59,6 @@ public class Game implements IGame {
             insertToField(player2);
         }
 
-        //add check if game end and player want to start new game
-        //endOfGame = true;
     }
 
     private void insertToField(Player player) {
@@ -105,5 +82,29 @@ public class Game implements IGame {
         }
         return 'e';
 
+    }
+
+    private void getChoice() {
+        boolean flagContinue;
+
+        do {
+            display.displayMessage("You want to start new game? y/n : ");
+            String choiceString = inputDataString.getData();
+            switch (checkChoice(choiceString.charAt(0))) {
+                case 'y':
+                    field.clearField();
+                    globalSteps = 0;
+                    flagContinue = true;
+                    break;
+                case 'n':
+                    endOfGame = true;
+                    flagContinue = true;
+                    break;
+                default:
+                    display.displayMessage("Invalid option.\n");
+                    flagContinue = false;
+                    break;
+            }
+        } while (!flagContinue);
     }
 }

@@ -45,7 +45,7 @@ public class Game implements IGame {
                 display.displayMessage("globalSteps " + globalSteps + "\n");
 
             } while (globalSteps < MAX_CELLS);
-            if (globalSteps >= MAX_CELLS && !player1.getYouWin() && !player2.getYouWin()) {
+            if (globalSteps >= MAX_CELLS && (!player1.getYouWin() || !player2.getYouWin())) {
                 display.displayMessage("Standoff\n");
                 getChoice();
             }
@@ -56,7 +56,7 @@ public class Game implements IGame {
 
     private void gameMoves(Player player1, Player player2) {
         insertToField(player1);
-        if (globalSteps < MAX_CELLS) {
+        if (globalSteps < MAX_CELLS && !player1.getYouWin()) {
             insertToField(player2);
         }
 
@@ -112,7 +112,7 @@ public class Game implements IGame {
 
     private void checkWin(Player player) {
         if (searchWinner(player.getPlayerSymbol())) {
-            display.displayMessage("\n" + player.getName() + " you win!!!\n");
+            display.displayMessage("\n" + player.getName() + " win!!!\n");
             field.displayField();
             player.setYouWin(true);
             getChoice();

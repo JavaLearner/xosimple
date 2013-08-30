@@ -44,8 +44,8 @@ public class Game implements IGame {
                 gameMoves(player1, player2);
                 display.displayMessage("globalSteps " + globalSteps + "\n");
 
-            } while (globalSteps < MAX_CELLS);
-            if (globalSteps >= MAX_CELLS && (!player1.getYouWin() || !player2.getYouWin())) {
+            } while (globalSteps < MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin()));
+            if (globalSteps >= MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin())) {
                 display.displayMessage("Standoff\n");
                 getChoice();
             }
@@ -96,6 +96,10 @@ public class Game implements IGame {
                 case 'y':
                     field.clearField();
                     globalSteps = 0;
+                    player1.setPlayerSteps(0);
+                    player2.setPlayerSteps(0);
+                    player1.setYouWin(false);
+                    player2.setYouWin(false);
                     flagContinue = true;
                     break;
                 case 'n':

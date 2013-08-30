@@ -32,7 +32,7 @@ public class ConsoleField implements IField {
         try {
             if (gameField[player.getAxisX()][player.getAxisY()] == EMPTY_CELL) {
                 gameField[player.getAxisX()][player.getAxisY()] = player.getPlayerSymbol();
-                } else {
+            } else {
                 display.displayMessage("The cell not empty. Choose another one.");
                 return false;
             }

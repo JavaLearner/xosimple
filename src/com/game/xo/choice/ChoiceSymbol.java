@@ -63,12 +63,9 @@ public class ChoiceSymbol implements IChoiceSymbol {
         int temp = randomGenerator.nextInt(2);
         switch (temp) {
             case 0:
-                consoleDisplay.displayMessage("generate: " + temp + "\n");
                 setSymbol(player2, player1);
                 break;
             case 1:
-                consoleDisplay.displayMessage("generate: " + temp + "\n");
-
                 setSymbol(player1, player2);
                 break;
             default:

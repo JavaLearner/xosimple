@@ -9,6 +9,7 @@ import com.game.xo.players.Player;
 
 
 public class ChoicePlayer implements IChoicePlayer {
+    private static int counter = 1;
     ConsoleDisplay consoleDisplay = new ConsoleDisplay();
     InputDataString inputDataString = new InputDataString();
 
@@ -19,7 +20,7 @@ public class ChoicePlayer implements IChoicePlayer {
             case 'h':
                 return new Human(getPlayerName());
             case 'c':
-                return new Computer();
+                return new Computer(counter++);
             default:
                 consoleDisplay.displayMessage("Invalid option.\n");
                 return null;

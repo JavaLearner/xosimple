@@ -8,12 +8,12 @@ import com.game.xo.field.IField;
 import java.util.Random;
 
 public class Computer extends Player {
-    private static final String NAME = "Computer";
+    private static final String NAME = "Computer ";
     private final int STATE1 = 1;
     private final int STATE3 = 3;
 
-    public Computer() {
-        super(NAME);
+    public Computer(int number) {
+        super(NAME + number);
     }
 
     @Override
@@ -26,11 +26,8 @@ public class Computer extends Player {
     private void generateCoordinates() {
         int size = 3;
         Random randomGenerator = new Random();
-
         setAxisX(randomGenerator.nextInt(size));
-        System.out.println("\n" + "getAxisX() " + getAxisX());
         setAxisY(randomGenerator.nextInt(size));
-        System.out.println("getAxisY() " + getAxisY());
 
     }
 

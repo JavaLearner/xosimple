@@ -2,7 +2,6 @@ package com.game.xo.players;
 
 import com.game.xo.display.IDisplay;
 import com.game.xo.input.InputDataNumber;
-import com.game.xo.input.InputDataString;
 
 public class Player {
     private String name;
@@ -11,7 +10,6 @@ public class Player {
     private boolean youWin = false;
     private int axisX;
     private int axisY;
-    //    private InputDataString inputDataString;
     private InputDataNumber inputDataNumber;
 
 
@@ -23,8 +21,6 @@ public class Player {
     }
 
     //getters and setters
-
-
     public void setAxisX(int axisX) {
         this.axisX = axisX;
     }
@@ -54,16 +50,16 @@ public class Player {
         return playerSymbol;
     }
 
-    public void setPlayerSteps(int step) {
-        gameSteps = step;
+    public void setPlayerSteps(int gameSteps) {
+        this.gameSteps = gameSteps;
     }
 
     public int getPlayerSteps() {
         return gameSteps;
     }
 
-    public void setYouWin(boolean win) {
-        youWin = win;
+    public void setYouWin(boolean youWin) {
+        this.youWin = youWin;
     }
 
     public boolean getYouWin() {
@@ -73,12 +69,8 @@ public class Player {
     public void getCoordinates(IDisplay display) {
         display.displayMessage("\nPlease enter your coordinate (x,): ");
         axisX = inputDataNumber.getNumber();
-        display.displayMessage("player x: " + axisX + "\n");
         display.displayMessage("Please enter your coordinate (,y): ");
         axisY = inputDataNumber.getNumber();
-        display.displayMessage("player y: " + axisY + "\n");
-
-
     }
 
     public void resetPlayer() {

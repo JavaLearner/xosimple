@@ -37,15 +37,15 @@ public class Game implements IGame {
             display.displayMessage("Game start.\n");
             choiceSymbol.chooseSymbol(player1, player2);
             do {
-                display.displayMessage(player1.getName() + " your symbol : " + player1.getPlayerSymbol() + "\n");
-                display.displayMessage(player2.getName() + " your symbol : " + player2.getPlayerSymbol() + "\n");
-                display.displayMessage("\n");
-                field.displayField();
+//                display.displayMessage(player1.getName() + " your symbol : " + player1.getPlayerSymbol() + "\n");
+//                display.displayMessage(player2.getName() + " your symbol : " + player2.getPlayerSymbol() + "\n");
+//                display.displayMessage("\n");
                 gameMoves(player1, player2);
-                display.displayMessage("globalSteps " + globalSteps + "\n");
+//                field.displayField();
 
             } while (globalSteps < MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin()));
             if (globalSteps >= MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin())) {
+                        field.displayField();
                 display.displayMessage("Standoff\n");
                 getChoice();
             }
@@ -63,16 +63,14 @@ public class Game implements IGame {
     }
 
     private void insertToField(Player player) {
-        do {
+                field.displayField();
+            do {
             display.displayMessage("Player " + player.getName() + ". Your symbol  " + player.getPlayerSymbol() + ".");
             player.getCoordinates(display);
         } while (!field.setGameField(player, display));
         checkWin(player);
         globalSteps++;
         player.setPlayerSteps(globalSteps);
-        display.displayMessage("Player Steps " + player.getPlayerSteps());
-        display.displayMessage("\n");
-        field.displayField();
     }
 
     private char checkChoice(char inputChar) {

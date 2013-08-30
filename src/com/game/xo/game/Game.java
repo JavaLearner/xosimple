@@ -41,14 +41,13 @@ public class Game implements IGame {
 //                display.displayMessage(player2.getName() + " your symbol : " + player2.getPlayerSymbol() + "\n");
 //                display.displayMessage("\n");
                 gameMoves(player1, player2);
-//                field.displayField();
-
             } while (globalSteps < MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin()));
-            if (globalSteps >= MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin())) {
-                        field.displayField();
+            if (globalSteps > MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin())) {
+                field.displayField();
                 display.displayMessage("Standoff\n");
-                getChoice();
             }
+            getChoice();
+
         } while (!endOfGame);
 
 
@@ -56,10 +55,12 @@ public class Game implements IGame {
 
     private void gameMoves(Player player1, Player player2) {
         insertToField(player1);
-        if (globalSteps < MAX_CELLS && !player1.getYouWin()) {
+        display.displayMessage("player1.getPlayerSteps() " + player1.getPlayerSteps() + "\n");
+        if (globalSteps <= MAX_CELLS && !player1.getYouWin()) {
             insertToField(player2);
-        }
+            display.displayMessage("player2.getPlayerSteps() " + player2.getPlayerSteps() + "\n");
 
+        }
     }
 
     private void insertToField(Player player) {

@@ -3,6 +3,7 @@ package com.game.xo.field;
 
 import com.game.xo.display.ConsoleDisplay;
 import com.game.xo.display.IDisplay;
+import com.game.xo.players.Human;
 import com.game.xo.players.Player;
 
 import java.util.ArrayList;
@@ -33,7 +34,9 @@ public class ConsoleField implements IField {
             if (gameField[player.getAxisX()][player.getAxisY()] == EMPTY_CELL) {
                 gameField[player.getAxisX()][player.getAxisY()] = player.getPlayerSymbol();
             } else {
+                if(player instanceof Human){
                 display.displayMessage("The cell not empty. Choose another one.");
+                }
                 return false;
             }
             return true;

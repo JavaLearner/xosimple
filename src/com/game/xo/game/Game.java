@@ -66,7 +66,7 @@ public class Game implements IGame {
     private void insertToField(Player player) {
                 field.displayField();
             do {
-            display.displayMessage("Player " + player.getName() + ". Your symbol  " + player.getPlayerSymbol() + ".");
+            display.displayMessage(player.getInfo());
             player.getCoordinates(display);
         } while (!field.setGameField(player, display));
         checkWin(player);

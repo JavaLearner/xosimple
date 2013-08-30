@@ -78,4 +78,8 @@ public class Player {
         youWin = false;
     }
 
+    public String getInfo() {
+      return "Player " + getName() + ". Your symbol  " + getPlayerSymbol() + ".";
+    }
+
 }

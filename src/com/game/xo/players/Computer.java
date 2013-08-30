@@ -23,6 +23,11 @@ public class Computer extends Player {
 
     }
 
+    @Override
+    public String getInfo() {
+        return "";
+    }
+
     private void generateCoordinates() {
         int size = 3;
         Random randomGenerator = new Random();

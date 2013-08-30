@@ -96,10 +96,8 @@ public class Game implements IGame {
                 case 'y':
                     field.clearField();
                     globalSteps = 0;
-                    player1.setPlayerSteps(0);
-                    player2.setPlayerSteps(0);
-                    player1.setYouWin(false);
-                    player2.setYouWin(false);
+                    player1.resetPlayer();
+                    player2.resetPlayer();
                     flagContinue = true;
                     break;
                 case 'n':

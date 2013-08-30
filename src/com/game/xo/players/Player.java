@@ -81,4 +81,9 @@ public class Player {
 
     }
 
+    public void resetPlayer() {
+        gameSteps = 0;
+        youWin = false;
+    }
+
 }

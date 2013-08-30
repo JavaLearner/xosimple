@@ -9,7 +9,7 @@ public interface IField {
 
     public void clearField();
 
-//    public char getGameField(Player player);
+    public char getGameField(int axisX, int axisY);
 
     public void displayField();
 }

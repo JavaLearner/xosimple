@@ -5,6 +5,8 @@ import com.game.xo.display.ConsoleDisplay;
 import com.game.xo.display.IDisplay;
 import com.game.xo.players.Player;
 
+import java.util.ArrayList;
+
 public class ConsoleField implements IField {
     private final char EMPTY_CELL = ' ';
     private static final int AMOUNT_CELLS = 3;
@@ -14,7 +16,6 @@ public class ConsoleField implements IField {
     public ConsoleField(IDisplay display) {
         this.display = display;
         clearField();
-
     }
 
     //refactoring!!!!!!!!
@@ -27,10 +28,11 @@ public class ConsoleField implements IField {
     }
 
     public boolean setGameField(Player player, IDisplay display) {
+
         try {
             if (gameField[player.getAxisX()][player.getAxisY()] == EMPTY_CELL) {
                 gameField[player.getAxisX()][player.getAxisY()] = player.getPlayerSymbol();
-            } else {
+                } else {
                 display.displayMessage("The cell not empty. Choose another one.");
                 return false;
             }
@@ -42,10 +44,10 @@ public class ConsoleField implements IField {
     }
 
 
-//    public char getGameField(Player player) {
-//        return gameField[player.getAxisX()][player.getAxisY()];
-//
-//    }
+    public char getGameField(int axisX, int axisY) {
+        return gameField[axisX][axisY];
+
+    }
 
 
     public void displayField() {

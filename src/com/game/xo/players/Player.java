@@ -79,7 +79,7 @@ public class Player {
     }
 
     public String getInfo() {
-      return "Player " + getName() + ". Your symbol  " + getPlayerSymbol() + ".";
+      return "Play " + getName() + ". Your symbol  " + getPlayerSymbol() + ".";
     }
 
 }

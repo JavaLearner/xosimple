@@ -42,7 +42,7 @@ public class Game implements IGame {
 //                display.displayMessage("\n");
                 gameMoves(player1, player2);
             } while (globalSteps < MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin()));
-            if (globalSteps > MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin())) {
+            if (globalSteps >= MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin())) {
                 field.displayField();
                 display.displayMessage("Standoff\n");
             }
@@ -64,9 +64,9 @@ public class Game implements IGame {
     }
 
     private void insertToField(Player player) {
-                field.displayField();
-            do {
-            display.displayMessage(player.getInfo());
+        display.displayMessage(player.getInfo() + "\n");
+        field.displayField();
+        do {
             player.getCoordinates(display);
         } while (!field.setGameField(player, display));
         checkWin(player);

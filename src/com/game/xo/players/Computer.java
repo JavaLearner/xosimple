@@ -12,20 +12,23 @@ public class Computer extends Player {
     private final int STATE1 = 1;
     private final int STATE3 = 3;
 
+    public Computer() {
+        super(NAME);
+    }
     public Computer(int number) {
         super(NAME + number);
     }
 
     @Override
     public void getCoordinates(IDisplay display) {
-        display.displayMessage("Generate coordinates\n");
+        //display.displayMessage("Generate coordinates\n");
         generateCoordinates();
 
     }
 
     @Override
     public String getInfo() {
-        return "";
+        return "Play " + getName() + ".";
     }
 
     private void generateCoordinates() {

@@ -10,6 +10,9 @@ import com.game.xo.players.Player;
 
 public class ChoicePlayer implements IChoicePlayer {
     private static int counter = 1;
+    private static int numberHumanPlayers = 0;
+    private static int numberComputerPlayers = 0;
+
     ConsoleDisplay consoleDisplay = new ConsoleDisplay();
     InputDataString inputDataString = new InputDataString();
 
@@ -18,9 +21,15 @@ public class ChoicePlayer implements IChoicePlayer {
         String choiceString = inputDataString.getData();
         switch (checkChoice(choiceString.charAt(0))) {
             case 'h':
+                numberHumanPlayers++;
                 return new Human(getPlayerName());
             case 'c':
-                return new Computer(counter++);
+                numberComputerPlayers++;
+                    if(numberHumanPlayers == 0 && numberComputerPlayers != 1){
+                        return new Computer(2);
+                    }
+                    return new Computer();
+
             default:
                 consoleDisplay.displayMessage("Invalid option.\n");
                 return null;

@@ -17,7 +17,7 @@ public class Game implements IGame {
     private boolean endOfGame;
     private int globalSteps = 0;
     private final int MAX_CELLS = 9;
-    private final int MAX_INDEX = 3;
+    private final int THREE_WINNING_MOVES = 3;
     private int findWinner;
 
 
@@ -130,9 +130,9 @@ public class Game implements IGame {
 
     /*search winner in rows*/
     private boolean rowWinner(char symbol) {
-        for (int i = 0; i < MAX_INDEX; i++) {
+        for (int i = 0; i < THREE_WINNING_MOVES; i++) {
             findWinner = rowWinnerSub(i, symbol);
-            if (findWinner == MAX_INDEX) {
+            if (findWinner == THREE_WINNING_MOVES) {
                 return true;
             }
         }
@@ -141,7 +141,7 @@ public class Game implements IGame {
 
     private int rowWinnerSub(int axisX, char symbol) {
         int sum = 0;
-        for (int j = 0; j < MAX_INDEX; j++) {
+        for (int j = 0; j < THREE_WINNING_MOVES; j++) {
             if (field.getGameField(axisX, j) == symbol) {
                 sum++;
             }
@@ -151,9 +151,9 @@ public class Game implements IGame {
 
     /*search winner in columns*/
     private boolean columnWinner(char symbol) {
-        for (int i = 0; i < MAX_INDEX; i++) {
+        for (int i = 0; i < THREE_WINNING_MOVES; i++) {
             findWinner = columnWinnerSub(i, symbol);
-            if (findWinner == MAX_INDEX) {
+            if (findWinner == THREE_WINNING_MOVES) {
                 return true;
             }
         }
@@ -162,7 +162,7 @@ public class Game implements IGame {
 
     private int columnWinnerSub(int axisY, char symbol) {
         int sum = 0;
-        for (int j = 0; j < MAX_INDEX; j++) {
+        for (int j = 0; j < THREE_WINNING_MOVES; j++) {
             if (field.getGameField(j, axisY) == symbol) {
                 sum++;
             }
@@ -173,13 +173,13 @@ public class Game implements IGame {
     /*search winner in diagonals*/
     private boolean diagonalWinner(char symbol) {
         int i, sum = 0;
-        for (i = 0; i < MAX_INDEX; i++) {
+        for (i = 0; i < THREE_WINNING_MOVES; i++) {
             if (field.getGameField(i, i) == symbol) {
                 sum++;
             }
         }
         i = 1;
-        if (sum == MAX_INDEX || field.getGameField(i, i) == symbol &&
+        if (sum == THREE_WINNING_MOVES || field.getGameField(i, i) == symbol &&
                 field.getGameField(i + 1, i - 1) == symbol && field.getGameField(i - 1, i + 1) == symbol) {
             return true;
         }

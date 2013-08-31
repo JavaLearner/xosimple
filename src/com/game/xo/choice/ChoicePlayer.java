@@ -12,6 +12,9 @@ public class ChoicePlayer implements IChoicePlayer {
     private static int counter = 1;
     private static int numberHumanPlayers = 0;
     private static int numberComputerPlayers = 0;
+    private final int TWO_COMPUTERS = 2;
+    private final int ONE_COMPUTER = 1;
+    private final int ZERO_COMPUTERS = 0;
 
     ConsoleDisplay consoleDisplay = new ConsoleDisplay();
     InputDataString inputDataString = new InputDataString();
@@ -25,8 +28,8 @@ public class ChoicePlayer implements IChoicePlayer {
                 return new Human(getPlayerName());
             case 'c':
                 numberComputerPlayers++;
-                    if(numberHumanPlayers == 0 && numberComputerPlayers != 1){
-                        return new Computer(2);
+                    if(numberHumanPlayers == ZERO_COMPUTERS && numberComputerPlayers > ONE_COMPUTER){
+                        return new Computer(TWO_COMPUTERS);
                     }
                     return new Computer();
 

@@ -8,15 +8,16 @@ import com.game.xo.field.IField;
 import java.util.Random;
 
 public class Computer extends Player {
-    private static final String NAME = "Computer ";
+    private static final String NAME = "Computer";
     private final int STATE1 = 1;
     private final int STATE3 = 3;
+//    private final int MAX_INDEX =
 
     public Computer() {
         super(NAME);
     }
     public Computer(int number) {
-        super(NAME + number);
+        super(NAME + " " + number);
     }
 
     @Override

@@ -32,10 +32,8 @@ public class Game implements IGame {
     }
 
     public void startGame() {
-        ChoiceSymbol choiceSymbol = new ChoiceSymbol();
         do {
             display.displayMessage("Game start.\n");
-            choiceSymbol.chooseSymbol(player1, player2);
             do {
 //                display.displayMessage(player1.getName() + " your symbol : " + player1.getPlayerSymbol() + "\n");
 //                display.displayMessage(player2.getName() + " your symbol : " + player2.getPlayerSymbol() + "\n");
@@ -55,10 +53,10 @@ public class Game implements IGame {
 
     private void gameMoves(Player player1, Player player2) {
         insertToField(player1);
-        display.displayMessage("player1.getPlayerSteps() " + player1.getPlayerSteps() + "\n");
+//        display.displayMessage("player1.getPlayerSteps() " + player1.getPlayerSteps() + "\n");
         if (globalSteps <= MAX_CELLS && !player1.getYouWin()) {
             insertToField(player2);
-            display.displayMessage("player2.getPlayerSteps() " + player2.getPlayerSteps() + "\n");
+//            display.displayMessage("player2.getPlayerSteps() " + player2.getPlayerSteps() + "\n");
 
         }
     }
@@ -72,6 +70,7 @@ public class Game implements IGame {
         checkWin(player);
         globalSteps++;
         player.setPlayerSteps(globalSteps);
+
     }
 
     private char checkChoice(char inputChar) {

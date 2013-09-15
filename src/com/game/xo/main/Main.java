@@ -23,8 +23,9 @@ public class Main {
         boolean choiceFlag = true;
         ChoicePlayer choicePlayer = new ChoicePlayer();
         ChoiceSymbol choiceSymbol = new ChoiceSymbol();
+        display.displayMessage("Game start.\n");
         do {
-            Player firstPlayer = choicePlayer.choosePlayer();
+            Player firstPlayer = choicePlayer.setFirstPlayer();
 
             if (firstPlayer != null) {
                 do {

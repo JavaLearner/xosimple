@@ -33,7 +33,7 @@ public class Game implements IGame {
 
     public void startGame() {
         do {
-            display.displayMessage("Game start.\n");
+
             do {
                 gameMoves(player1, player2);
             } while (globalSteps < MAX_CELLS && (!player1.getYouWin() && !player2.getYouWin()));

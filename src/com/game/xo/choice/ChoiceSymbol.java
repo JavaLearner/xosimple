@@ -18,7 +18,7 @@ public class ChoiceSymbol implements IChoiceSymbol {
 
         if (player1 instanceof Human) {
             while (choiceFlag) {
-                consoleDisplay.displayMessage("Choose symbol x or o : ");
+                consoleDisplay.displayMessage(player1.getName() + " choose symbol x or o : ");
                 String choiceString = inputDataString.getData();
                 switch (checkChoice(choiceString.charAt(0))) {
                     case 'x':

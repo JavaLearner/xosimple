@@ -12,4 +12,5 @@ public interface IField {
     public char getGameField(int axisX, int axisY);
 
     public void displayField();
+    public void returnBack();
 }

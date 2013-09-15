@@ -6,13 +6,14 @@ import com.game.xo.display.IDisplay;
 import com.game.xo.players.Human;
 import com.game.xo.players.Player;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ConsoleField implements IField {
     private final char EMPTY_CELL = ' ';
     private static final int AMOUNT_CELLS = 3;
-    private char gameField[][] = new char[AMOUNT_CELLS][AMOUNT_CELLS];
+    private static char gameField[][] = new char[AMOUNT_CELLS][AMOUNT_CELLS];
     private IDisplay display;
+    LinkedList<char[][]> saveField = new LinkedList<char[][]>();
 
     public ConsoleField(IDisplay display) {
         this.display = display;
@@ -33,6 +34,7 @@ public class ConsoleField implements IField {
         try {
             if (gameField[player.getAxisX()][player.getAxisY()] == EMPTY_CELL) {
                 gameField[player.getAxisX()][player.getAxisY()] = player.getPlayerSymbol();
+                saveField.addFirst(gameField);
             } else {
                 if(player instanceof Human){
                 display.displayMessage("The cell not empty. Choose another one.");
@@ -46,6 +48,21 @@ public class ConsoleField implements IField {
         }
     }
 
+    public void returnBack() {
+        char[][] temp;
+               temp = saveField.getLast();
+        for (int i = 0; i < gameField.length; i++) {
+            for (int j = 0; j < gameField.length; j++) {
+                if (temp[i][j] == EMPTY_CELL) {
+                    System.out.print("(" + i + "," + j + ") ");
+                } else {
+                    System.out.print("  " + temp[i][j] + "   ");
+                }
+            }
+            System.out.print("\n");
+        }
+
+    }
 
     public char getGameField(int axisX, int axisY) {
         return gameField[axisX][axisY];
@@ -58,7 +75,7 @@ public class ConsoleField implements IField {
             displayFieldSub(i);
             display.displayMessage("\n");
         }
-        display.displayMessage("\n");
+//        display.displayMessage("\n");
     }
 
     private void displayFieldSub(int axisX) {

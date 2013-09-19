@@ -2,7 +2,6 @@ package com.game.xo.game;
 
 import com.game.xo.display.IDisplay;
 import com.game.xo.field.IField;
-import com.game.xo.input.InputDataNumber;
 import com.game.xo.input.InputDataString;
 import com.game.xo.players.Player;
 

@@ -1,6 +1,5 @@
 package com.game.xo.game;
 
-import com.game.xo.choice.ChoiceSymbol;
 import com.game.xo.display.IDisplay;
 import com.game.xo.field.IField;
 import com.game.xo.input.InputDataNumber;
@@ -11,7 +10,6 @@ public class Game implements IGame {
     private Player player1;
     private Player player2;
     private InputDataString inputDataString;
-    private InputDataNumber inputDataNumber;
     private IDisplay display;
     private IField field;
     private boolean endOfGame;
@@ -27,7 +25,6 @@ public class Game implements IGame {
         this.display = display;
         this.field = field;
         inputDataString = new InputDataString();
-        inputDataNumber = new InputDataNumber();
         endOfGame = false;
     }
 

@@ -82,7 +82,7 @@ public class Game implements IGame {
     }
 
     private void getChoice() {
-        boolean flagContinue;
+        boolean flagContinue = false;
 
         do {
             display.displayMessage("You want to start new game? y/n : ");
@@ -112,7 +112,6 @@ public class Game implements IGame {
             display.displayMessage("\n" + player.getName() + " win!!!\n");
             field.displayField();
             player.setYouWin(true);
-            getChoice();
         }
     }
 

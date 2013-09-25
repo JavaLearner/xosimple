@@ -48,12 +48,10 @@ public class Game implements IGame {
     private void gameMoves(Player player1, Player player2) {
 
         insertToField(player1);
-        display.displayMessage("player1.getPlayerSteps() " + player1.getPlayerSteps() + "\n");
         if (globalSteps < MAX_CELLS && !player1.getYouWin()) {
             insertToField(player2);
 //            field.returnBack();
 //            field.displayField();
-            display.displayMessage("player2.getPlayerSteps() " + player2.getPlayerSteps() + "\n");
 
         }
     }

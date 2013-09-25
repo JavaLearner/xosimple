@@ -34,10 +34,10 @@ public class ChoiceSymbol implements IChoiceSymbol {
                         break;
                 }
             }
-        } else {
-            if (player1 instanceof Computer) {
-                setSymbolComputer(player1, player2);
-            }
+//        } else {
+//            if (player1 instanceof Computer) {
+//                setSymbolComputer(player1, player2);
+//            }
 
         }
     }
@@ -58,18 +58,18 @@ public class ChoiceSymbol implements IChoiceSymbol {
         player2.setPlayerSymbol('0');
     }
 
-    private void setSymbolComputer(Player player1, Player player2) {
-        Random randomGenerator = new Random();
-        int temp = randomGenerator.nextInt(2);
-        switch (temp) {
-            case 0:
-                setSymbol(player2, player1);
-                break;
-            case 1:
-                setSymbol(player1, player2);
-                break;
-            default:
-                break;
-        }
-    }
+//    private void setSymbolComputer(Player player1, Player player2) {
+//        Random randomGenerator = new Random();
+//        int temp = randomGenerator.nextInt(2);
+//        switch (temp) {
+//            case 0:
+//                setSymbol(player2, player1);
+//                break;
+//            case 1:
+//                setSymbol(player1, player2);
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 }

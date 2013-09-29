@@ -114,7 +114,7 @@ public class Game implements IGame {
     }
 
 
-    public boolean searchWinner(char symbol) {
+    private boolean searchWinner(char symbol) {
         if (rowWinner(symbol) || columnWinner(symbol) || diagonalWinner(symbol)) {
             return true;
         } else {

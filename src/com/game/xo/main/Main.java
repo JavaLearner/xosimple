@@ -4,7 +4,6 @@ package com.game.xo.main;
 import com.game.xo.choice.ChoicePlayer;
 import com.game.xo.choice.ChoiceSymbol;
 import com.game.xo.display.ConsoleDisplay;
-import com.game.xo.display.IDisplay;
 import com.game.xo.field.ConsoleField;
 import com.game.xo.players.Player;
 import com.game.xo.game.Game;
@@ -12,8 +11,7 @@ import com.game.xo.game.Game;
 /**
  * Created with IntelliJ IDEA.
  * User: JL Junior
- * Date: 7/9/13
- * Time: 10:30 PM
+ * Date: 7/9/13 Time: 10:30 PM
  * simple game "Tic Tac Toe" for console
  */
 public class Main {
